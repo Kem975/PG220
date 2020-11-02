@@ -7,6 +7,6 @@ abstract class Player {
         this.type = type;
     }
 
-    Nextmove(int colonne);
+    int Nextmove(Grid grille);
 
 }
