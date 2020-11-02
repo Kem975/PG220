@@ -14,13 +14,10 @@ class Game {
     private static Player player2;*/
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Width of the grid:");
-        int width = in.nextInt();
-        System.out.println("Length of the grid:");
-        int length = in.nextInt();
+        Grid grid = newGrid();
         Player player1 = newPlayer("Player 1 ?");
         Player player2 = newPlayer("Player 2 ?");
+        grid.draw();
     }
 
     private static Player newPlayer(String line)  {
@@ -30,22 +27,35 @@ class Game {
             String player = in.nextLine();
             String mot[] = player.split(" ");
             if (mot.length < 2) {
+                System.out.println("Here");
                 System.out.println("You need to specify a player type.");
                 System.out.println("Example: human Joe");
                 System.out.println("Or: ia Bob");
                 continue;
             }
-            if (mot[0] == "human") {
+            if (mot[0].equals("human")) {
                 return new Human(mot[1]);
-            } else if (mot[0] == "ia") {
+            } else if (mot[0].equals("ia")) {
                 return new IARandom(mot[1]);
             } else {
+                System.out.println("there");
                 System.out.println("You need to specify a player type.");
                 System.out.println("Example: human Joe");
                 System.out.println("Or: ia Bob");
                 continue;
             }
 
+        }
+    }
+
+    private static Grid newGrid() {
+        while(true) {
+            Scanner in = new Scanner(System.in);
+            System.out.println("Width of the grid:");
+            int width = in.nextInt();
+            System.out.println("Length of the grid:");
+            int length = in.nextInt();
+            return new Grid(width,length);
         }
     }
 }
