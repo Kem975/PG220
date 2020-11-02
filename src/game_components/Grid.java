@@ -37,7 +37,22 @@ public class Grid {
     public boolean win(int x, int y, char pion){
         int count = 0;
         count = linearWin(x,y,1,0,pion) + linearWin(x,y,-1,0,pion);
-        return count>3;
+        if(count>3){
+            return true;
+        }
+        count = linearWin(x,y,0,1,pion) + linearWin(x,y,0,-1,pion);
+        if(count>3){
+            return true;
+        }
+        count = linearWin(x,y,1,-1,pion) + linearWin(x,y,-1,1,pion);
+        if(count>3){
+            return true;
+        }
+        count = linearWin(x,y,-1,-1,pion) + linearWin(x,y,1,1,pion);
+        if(count>3){
+            return true;
+        }
+        return false;
     }
 
     public void turn(int column,char pion){
