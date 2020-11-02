@@ -1,4 +1,4 @@
-abstract class Player {
+public abstract class Player {
     private String nom;
     private int type;
 
