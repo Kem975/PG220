@@ -67,13 +67,14 @@ public class Grid {
 
     public void draw(){
         for(int i = 0; i<this.width;i++){
-            System.out.println(i+1);
-            System.out.println(" ");
+            System.out.print(i+1);
+            System.out.print(" ");
         }
+        System.out.println("");
         for (int j = 0; j<this.length;j++){
             for(int i = 0; i<this.width;i++){
-                System.out.println(grid[i][j]);
-                System.out.println(" ");
+                System.out.print(grid[i][j]);
+                System.out.print(" ");
             }
             System.out.println("\n");
         }
