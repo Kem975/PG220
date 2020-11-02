@@ -1,6 +1,6 @@
 abstract class Player {
-    String nom;
-    int type;
+    private String nom;
+    private int type;
 
     public Player(String nom, int type){
         this.nom = nom;
