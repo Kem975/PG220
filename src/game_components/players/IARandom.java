@@ -1,6 +1,9 @@
 package game_components.players;
 
-import java.util.Random
+import java.util.Scanner;
+import java.util.Random;
+import game_components.Player;
+import game_components.Grid;
 
 public class IARandom extends Player {
 
@@ -8,7 +11,7 @@ public class IARandom extends Player {
         super(name, 1);
     }
 
-    int Nextmove(Grid grille){
+    public int Nextmove(Grid grille){
         Random rand = new Random();
         return rand.nextInt(grille.getWidth());
     }
