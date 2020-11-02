@@ -1,3 +1,3 @@
-public class Humain implements Player {
+public class Humain extends Player {
 
 }
