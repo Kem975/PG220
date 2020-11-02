@@ -8,8 +8,8 @@ public class IARandom extends Player {
         super(name, 1);
     }
 
-    Nextmove(Grid grille){
+    int Nextmove(Grid grille){
         Random rand = new Random();
-        int colonne = rand.nextInt(grille.getWidth());
+        return rand.nextInt(grille.getWidth());
     }
 }
