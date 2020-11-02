@@ -9,6 +9,6 @@ public abstract class Player {
         this.type = type;
     }
 
-    int Nextmove(Grid grille);
+    public abstract int Nextmove(Grid grille);
 
 }
