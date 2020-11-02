@@ -21,7 +21,7 @@ public class Grid {
     }
 
     public boolean win(int x, int y){
-        return 1>0;
+        
     }
 
     public void turn(int column,char pion){
