@@ -1,4 +1,4 @@
-package gamecomponents;
+package GameComponents;
 
 public class Game {
     Grid grid;
