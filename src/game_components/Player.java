@@ -1,3 +1,5 @@
+package game_components;
+
 public abstract class Player {
     private String nom;
     private int type;

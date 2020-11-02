@@ -1,4 +1,4 @@
-package game_components;
+package game_components.players;
 
 import java.util.Random
 
