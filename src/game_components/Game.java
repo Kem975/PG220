@@ -1,6 +1,5 @@
 package game_components;
 
-
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -8,10 +7,10 @@ import java.util.Scanner;
 import game_components.players.*;
 
 public class Game {
-    private Grid grid;
+    /*private Grid grid;
     //private Set<Player> players;
     private static Player player1;
-    private static Player player2;
+    private static Player player2;*/
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -19,8 +18,8 @@ public class Game {
         int width = in.nextInt();
         System.out.println("Length of the grid:");
         int length = in.nextInt();
-        player1 = newPlayer("Player 1 ?");
-        player2 = newPlayer("Player 2 ?");
+        Player player1 = newPlayer("Player 1 ?");
+        Player player2 = newPlayer("Player 2 ?");
     }
 
     private static Player newPlayer(String line)  {

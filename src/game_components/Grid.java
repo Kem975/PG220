@@ -1,6 +1,5 @@
 package game_components;
 
-
 public class Grid {
 
     private int length;
