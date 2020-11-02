@@ -1,12 +1,13 @@
-package game_components;
+
 
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Scanner;
 
 import game_components.players.*;
+import game_components.*;
 
-public class Game {
+class Game {
     /*private Grid grid;
     //private Set<Player> players;
     private static Player player1;
