@@ -18,7 +18,7 @@ public class Human extends Player {
         }
         else{
             System.out.println("Colonne non valide\n");
-            Nextmove(grille);
+            return Nextmove(grille);
         }
     }
 
