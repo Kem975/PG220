@@ -1,14 +1,17 @@
 package game_components;
 
+
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Scanner;
 
+import game_components.players.*;
+
 public class Game {
     private Grid grid;
     //private Set<Player> players;
-    private Player player1;
-    private Player player2;
+    private static Player player1;
+    private static Player player2;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -16,9 +19,33 @@ public class Game {
         int width = in.nextInt();
         System.out.println("Length of the grid:");
         int length = in.nextInt();
-        System.out.println("Player 1?");
-        String player1 = in.nextLine();
-        System.out.println("Player 2?");
-        String player2 = in.nextLine();
+        player1 = newPlayer("Player 1 ?");
+        player2 = newPlayer("Player 2 ?");
+    }
+
+    private static Player newPlayer(String line)  {
+        while(true) {
+            System.out.println(line);
+            Scanner in = new Scanner(System.in);
+            String player = in.nextLine();
+            String mot[] = player.split(" ");
+            if (mot.length < 2) {
+                System.out.println("You need to specify a player type.");
+                System.out.println("Example: human Joe");
+                System.out.println("Or: ia Bob");
+                continue;
+            }
+            if (mot[0] == "human") {
+                return new Human(mot[1]);
+            } else if (mot[0] == "ia") {
+                return new IARandom(mot[1]);
+            } else {
+                System.out.println("You need to specify a player type.");
+                System.out.println("Example: human Joe");
+                System.out.println("Or: ia Bob");
+                continue;
+            }
+
+        }
     }
 }
