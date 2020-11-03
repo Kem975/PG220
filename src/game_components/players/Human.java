@@ -13,6 +13,7 @@ public class Human extends Player {
     public int Nextmove(Grid grille){
         Scanner sc = new Scanner(System.in);
         int colonne = sc.nextInt();
+        sc.close();
         if(colonne>0 && colonne<=grille.getWidth()){
             return colonne;
         }

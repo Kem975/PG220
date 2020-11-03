@@ -42,8 +42,10 @@ class Game {
                 continue;
             }
             if (mot[0].equals("human")) {
+                in.close();
                 return new Human(mot[1]);
             } else if (mot[0].equals("ia")) {
+                in.close();
                 return new IARandom(mot[1]);
             } else {
                 System.out.println("there");
@@ -63,6 +65,7 @@ class Game {
             int width = in.nextInt();
             System.out.println("Length of the grid:");
             int length = in.nextInt();
+            in.close();
             return new Grid(width,length);
         }
     }

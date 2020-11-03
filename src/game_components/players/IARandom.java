@@ -1,6 +1,5 @@
 package game_components.players;
 
-import java.util.Scanner;
 import java.util.Random;
 import game_components.Player;
 import game_components.Grid;
