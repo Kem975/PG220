@@ -17,7 +17,14 @@ class Game {
         Grid grid = newGrid();
         Player player1 = newPlayer("Player 1 ?");
         Player player2 = newPlayer("Player 2 ?");
-        grid.draw();
+        boolean isWin = false;
+        while(!isWin) {
+            grid.draw();
+            int col = player1.Nextmove(grid);
+            int y = grid.turn(col, 'o');
+
+        }
+        
     }
 
     private static Player newPlayer(String line)  {

@@ -13,7 +13,7 @@ public class Grid {
             this.grid = new char[this.length][this.width];
             for (int j = 0; j < length; j++) {
                 for (int i = 0; i < width; i++) {
-                    grid[i][j] = '.';
+                    grid[j][i] = '.';
                 }
             }
         }
@@ -54,15 +54,16 @@ public class Grid {
         return false;
     }
 
-    public void turn(int column,char pion){
+    public int turn(int column,char pion){
         if(column >= 0 && column<this.width) {
             for (int i = this.length; i > 0; i++) {
                 if (this.grid[column][i] == '.') {
                     this.grid[column][i] = pion;
-                    break;
+                    return i;
                 }
             }
         }
+        return -1;
     }
 
     public void draw(){
@@ -73,7 +74,7 @@ public class Grid {
         System.out.println("");
         for (int j = 0; j<this.length;j++){
             for(int i = 0; i<this.width;i++){
-                System.out.print(grid[i][j]);
+                System.out.print(grid[j][i]);
                 System.out.print(" ");
             }
             System.out.println("\n");
