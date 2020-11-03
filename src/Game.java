@@ -22,6 +22,7 @@ class Game {
             grid.draw();
             int col = player1.Nextmove(grid);
             int y = grid.turn(col, 'o');
+            isWin=grid.win(col, y, 'o');
 
         }
         
