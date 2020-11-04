@@ -10,16 +10,14 @@ public class Human extends Player {
         super(name, 0);
     }
 
-    public int Nextmove(Grid grille){
-        Scanner sc = new Scanner(System.in);
-        int colonne = sc.nextInt();
-        sc.close();
+    public int Nextmove(Grid grille,Scanner in){
+        int colonne = in.nextInt();
         if(colonne>0 && colonne<=grille.getWidth()){
-            return colonne;
+            return colonne-1;
         }
         else{
             System.out.println("Colonne non valide\n");
-            return Nextmove(grille);
+            return Nextmove(grille,in);
         }
     }
 

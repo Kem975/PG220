@@ -11,9 +11,9 @@ public class Grid {
             this.length = length;
             this.width = width;
             this.grid = new char[this.length][this.width];
-            for (int j = 0; j < length; j++) {
-                for (int i = 0; i < width; i++) {
-                    grid[j][i] = '.';
+            for (int i = 0; i < length; i++) {
+                for (int j = 0; j < width; j++) {
+                    grid[i][j] = '.';
                 }
             }
         }
@@ -22,7 +22,7 @@ public class Grid {
     public int linearWin(int x, int y, int stepX, int stepY,char pion){
         int count = 0;
         for(int i=0;i<4;i++){
-            if(x+i*stepX<0 || x+i*stepX > this.width || y+i*stepY<0 || y+i*stepY > this.length){
+            if(x+i*stepX<0 || x+i*stepX > this.width-1 || y+i*stepY<0 || y+i*stepY > this.length-1){
                 return count;
             }
             if(this.grid[x+i*stepX][y+i*stepY] != pion){
@@ -56,9 +56,9 @@ public class Grid {
 
     public int turn(int column,char pion){
         if(column >= 0 && column<this.width) {
-            for (int i = this.length; i > 0; i++) {
-                if (this.grid[column][i] == '.') {
-                    this.grid[column][i] = pion;
+            for (int i = this.length-1; i >= 0; i--) {
+                if (this.grid[i][column] == '.') {
+                    this.grid[i][column] = pion;
                     return i;
                 }
             }
@@ -72,9 +72,9 @@ public class Grid {
             System.out.print(" ");
         }
         System.out.println("");
-        for (int j = 0; j<this.length;j++){
-            for(int i = 0; i<this.width;i++){
-                System.out.print(grid[j][i]);
+        for (int i = 0; i<this.length;i++){
+            for(int j = 0; j<this.width;j++){
+                System.out.print(grid[i][j]);
                 System.out.print(" ");
             }
             System.out.println("\n");

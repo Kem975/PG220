@@ -1,5 +1,8 @@
 package game_components;
 
+import java.util.Scanner;
+
+
 public abstract class Player {
     private String nom;
     private int type;
@@ -9,6 +12,6 @@ public abstract class Player {
         this.type = type;
     }
 
-    public abstract int Nextmove(Grid grille);
+    public abstract int Nextmove(Grid grille,Scanner in);
 
 }
