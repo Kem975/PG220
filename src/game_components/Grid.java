@@ -21,8 +21,8 @@ public class Grid {
 
     public int linearWin(int x, int y, int stepX, int stepY,char pion){
         int count = 0;
-        for(int i=0;i<4;i++){
-            if(x+i*stepX<0 || x+i*stepX > this.width-1 || y+i*stepY<0 || y+i*stepY > this.length-1){
+        for(int i=1;i<4;i++){
+            if(x+i*stepX<0 || x+i*stepX > this.length-1 || y+i*stepY<0 || y+i*stepY > this.width-1){
                 return count;
             }
             if(this.grid[x+i*stepX][y+i*stepY] != pion){
@@ -35,20 +35,20 @@ public class Grid {
 
     public boolean win(int x, int y, char pion){
         int count = 0;
-        count = linearWin(x,y,1,0,pion) + linearWin(x,y,-1,0,pion);
-        if(count>3){
+        count = linearWin(x,y,1,0,pion) + linearWin(x,y,-1,0,pion)+1;
+        if(count>=4){
             return true;
         }
-        count = linearWin(x,y,0,1,pion) + linearWin(x,y,0,-1,pion);
-        if(count>3){
+        count = linearWin(x,y,0,1,pion) + linearWin(x,y,0,-1,pion)+1;
+        if(count>=4){
             return true;
         }
-        count = linearWin(x,y,1,-1,pion) + linearWin(x,y,-1,1,pion);
-        if(count>3){
+        count = linearWin(x,y,1,-1,pion) + linearWin(x,y,-1,1,pion)+1;
+        if(count>=4){
             return true;
         }
-        count = linearWin(x,y,-1,-1,pion) + linearWin(x,y,1,1,pion);
-        if(count>3){
+        count = linearWin(x,y,-1,-1,pion) + linearWin(x,y,1,1,pion)+1;
+        if(count>=4){
             return true;
         }
         return false;
