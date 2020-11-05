@@ -19,8 +19,8 @@ class Game {
         Player player1 = newPlayer("Player 1 ?",in);
         Player player2 = newPlayer("Player 2 ?",in);
         boolean isWin = false;
+        grid.draw();
         while(!isWin) {
-            grid.draw();
             int col = player1.Nextmove(grid,in);
             int x = grid.turn(col, 'o');
             grid.draw();
@@ -31,6 +31,7 @@ class Game {
             col = player2.Nextmove(grid,in);
             x=grid.turn(col,'x');
             isWin=grid.win(x, col, 'x');
+            grid.draw();
 
         }
         in.close();
