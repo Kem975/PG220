@@ -1,5 +1,4 @@
 
-
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -8,38 +7,55 @@ import game_components.players.*;
 import game_components.*;
 
 class Game {
-    /*private Grid grid;
-    //private Set<Player> players;
-    private static Player player1;
-    private static Player player2;*/
+    /*
+     * private Grid grid; //private Set<Player> players; private static Player
+     * player1; private static Player player2;
+     */
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
-        Player player1 = newPlayer("Player 1 ?",in);
-        Player player2 = newPlayer("Player 2 ?",in);
+        Player player1 = newPlayer("Player 1 ?", in);
+        Player player2 = newPlayer("Player 2 ?", in);
         boolean isWin = false;
+        boolean tie = false;
         grid.draw();
-        while(!isWin) {
-            int col = player1.Nextmove(grid,in);
+        while (!isWin || !tie) {
+            int col = player1.Nextmove(grid, in);
             int x = grid.turn(col, 'o');
+            while (x == -1) {
+                System.out.println("Coup incorrect");
+                grid.draw();
+                col = player1.Nextmove(grid, in);
+                x = grid.turn(col, 'o');
+            }
             grid.draw();
-            isWin=grid.win(x, col, 'o');
-            if (isWin) {
+            isWin = grid.win(x, col, 'o');
+            tie = grid.tie();
+            if (isWin || tie) {
                 break;
             }
-            col = player2.Nextmove(grid,in);
-            x=grid.turn(col,'x');
-            isWin=grid.win(x, col, 'x');
+            col = player2.Nextmove(grid, in);
+            x = grid.turn(col, 'x');
+            while (x == -1) {
+                System.out.println("Coup incorrect");
+                grid.draw();
+                col = player2.Nextmove(grid, in);
+                x = grid.turn(col, 'x');
+            }
+
+            isWin = grid.win(x, col, 'x');
+            tie = grid.tie();
+
             grid.draw();
 
         }
         in.close();
-        
+
     }
 
-    private static Player newPlayer(String line,Scanner in)  {
-        while(true) {
+    private static Player newPlayer(String line, Scanner in) {
+        while (true) {
             System.out.println(line);
             String player = in.nextLine();
             String mot[] = player.split(" ");
@@ -65,13 +81,13 @@ class Game {
     }
 
     private static Grid newGrid(Scanner in) {
-        while(true) {
-            
+        while (true) {
+
             System.out.println("Width of the grid:");
             int width = in.nextInt();
             System.out.println("Length of the grid:");
             int length = in.nextInt();
-            return new Grid(length,width);
+            return new Grid(length, width);
         }
     }
 }

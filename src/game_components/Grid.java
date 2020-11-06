@@ -5,9 +5,10 @@ public class Grid {
     private int length;
     private int width;
     private char[][] grid;
+    private int empty_case;
 
     public Grid(int length, int width) {
-        if(length>0 && width>0) {
+        if (length >= 7 && width >= 8) {
             this.length = length;
             this.width = width;
             this.grid = new char[this.length][this.width];
@@ -16,16 +17,25 @@ public class Grid {
                     grid[i][j] = '.';
                 }
             }
+            this.empty_case = length * width;
         }
     }
 
-    public int linearWin(int x, int y, int stepX, int stepY,char pion){
+    public boolean tie() {
+        if (empty_case == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public int linearWin(int x, int y, int stepX, int stepY, char pion) {
         int count = 0;
-        for(int i=1;i<4;i++){
-            if(x+i*stepX<0 || x+i*stepX > this.length-1 || y+i*stepY<0 || y+i*stepY > this.width-1){
+        for (int i = 1; i < 4; i++) {
+            if (x + i * stepX < 0 || x + i * stepX > this.length - 1 || y + i * stepY < 0
+                    || y + i * stepY > this.width - 1) {
                 return count;
             }
-            if(this.grid[x+i*stepX][y+i*stepY] != pion){
+            if (this.grid[x + i * stepX][y + i * stepY] != pion) {
                 return count;
             }
             count++;
@@ -33,32 +43,33 @@ public class Grid {
         return count;
     }
 
-    public boolean win(int x, int y, char pion){
+    public boolean win(int x, int y, char pion) {
         int count = 0;
-        count = linearWin(x,y,1,0,pion) + linearWin(x,y,-1,0,pion)+1;
-        if(count>=4){
+        count = linearWin(x, y, 1, 0, pion) + linearWin(x, y, -1, 0, pion) + 1;
+        if (count >= 4) {
             return true;
         }
-        count = linearWin(x,y,0,1,pion) + linearWin(x,y,0,-1,pion)+1;
-        if(count>=4){
+        count = linearWin(x, y, 0, 1, pion) + linearWin(x, y, 0, -1, pion) + 1;
+        if (count >= 4) {
             return true;
         }
-        count = linearWin(x,y,1,-1,pion) + linearWin(x,y,-1,1,pion)+1;
-        if(count>=4){
+        count = linearWin(x, y, 1, -1, pion) + linearWin(x, y, -1, 1, pion) + 1;
+        if (count >= 4) {
             return true;
         }
-        count = linearWin(x,y,-1,-1,pion) + linearWin(x,y,1,1,pion)+1;
-        if(count>=4){
+        count = linearWin(x, y, -1, -1, pion) + linearWin(x, y, 1, 1, pion) + 1;
+        if (count >= 4) {
             return true;
         }
         return false;
     }
 
-    public int turn(int column,char pion){
-        if(column >= 0 && column<this.width) {
-            for (int i = this.length-1; i >= 0; i--) {
+    public int turn(int column, char pion) {
+        if (column >= 0 && column < this.width) {
+            for (int i = this.length - 1; i >= 0; i--) {
                 if (this.grid[i][column] == '.') {
                     this.grid[i][column] = pion;
+                    this.empty_case--;
                     return i;
                 }
             }
@@ -66,14 +77,14 @@ public class Grid {
         return -1;
     }
 
-    public void draw(){
-        for(int i = 0; i<this.width;i++){
-            System.out.print(i+1);
+    public void draw() {
+        for (int i = 0; i < this.width; i++) {
+            System.out.print(i + 1);
             System.out.print(" ");
         }
         System.out.println("");
-        for (int i = 0; i<this.length;i++){
-            for(int j = 0; j<this.width;j++){
+        for (int i = 0; i < this.length; i++) {
+            for (int j = 0; j < this.width; j++) {
                 System.out.print(grid[i][j]);
                 System.out.print(" ");
             }
