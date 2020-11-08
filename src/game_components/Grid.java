@@ -8,7 +8,7 @@ public class Grid {
     private int empty_case;
 
     public Grid(int length, int width) {
-        if (length >= 7 && width >= 8) {
+        if (length >= 8 && width >= 7) {
             this.length = length;
             this.width = width;
             this.grid = new char[this.length][this.width];

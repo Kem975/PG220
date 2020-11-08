@@ -19,6 +19,8 @@ class Game {
         Player player2 = newPlayer("Player 2 ?", in);
         boolean isWin = false;
         boolean tie = false;
+        System.out.println(grid.getLength());
+        System.out.println(grid.getWidth());
         grid.draw();
         while (!isWin || !tie) {
             int col = player1.Nextmove(grid, in);
@@ -82,11 +84,10 @@ class Game {
 
     private static Grid newGrid(Scanner in) {
         while (true) {
-
-            System.out.println("Width of the grid:");
             int width = in.nextInt();
-            System.out.println("Length of the grid:");
+            System.out.println(width);
             int length = in.nextInt();
+            System.out.println(length);
             return new Grid(length, width);
         }
     }
