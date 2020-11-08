@@ -22,7 +22,7 @@ class Game {
         System.out.println(grid.getLength());
         System.out.println(grid.getWidth());
         grid.draw();
-        while (!isWin || !tie) {
+        while (!isWin && !tie) {
             int col = player1.Nextmove(grid, in);
             int x = grid.turn(col, 'o');
             while (x == -1) {
