@@ -84,10 +84,11 @@ class Game {
 
     private static Grid newGrid(Scanner in) {
         while (true) {
+
+            System.out.println("Width of the grid:");
             int width = in.nextInt();
-            System.out.println(width);
+            System.out.println("Length of the grid:");
             int length = in.nextInt();
-            System.out.println(length);
             return new Grid(length, width);
         }
     }
