@@ -7,7 +7,7 @@ public class Grid {
     private char[][] grid;
     private int empty_case;
 
-    public Grid(int length, int width) {
+    public Grid(int length, int width) throws GridTailleException{
         if (length >= 8 && width >= 7) {
             this.length = length;
             this.width = width;
@@ -18,6 +18,9 @@ public class Grid {
                 }
             }
             this.empty_case = length * width;
+        }
+        else{
+            throw new GridTailleException();
         }
     }
 
