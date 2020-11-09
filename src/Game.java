@@ -12,7 +12,7 @@ class Game {
      * player1; private static Player player2;
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws GridTailleException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
         Player player1 = newPlayer("Player 1 ?", in);
@@ -82,7 +82,7 @@ class Game {
         }
     }
 
-    private static Grid newGrid(Scanner in) {
+    private static Grid newGrid(Scanner in) throws GridTailleException {
         while (true) {
 
             System.out.println("Width of the grid:");
