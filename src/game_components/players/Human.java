@@ -21,4 +21,8 @@ public class Human extends Player {
         }
     }
 
+    public String GetNom() {
+        return this.nom;
+    }
+
 }

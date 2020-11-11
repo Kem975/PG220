@@ -1,6 +1,3 @@
-
-import java.util.Set;
-import java.util.HashSet;
 import java.util.Scanner;
 
 import game_components.players.*;
@@ -15,43 +12,39 @@ class Game {
     public static void main(String[] args) throws GridTailleException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
-        Player player1 = newPlayer("Player 1 ?", in);
-        Player player2 = newPlayer("Player 2 ?", in);
+        System.out.println("Number of player ?");
+        int nbr = in.nextInt();
+        Player players[] = new Player[nbr];
+        for (int i = 0; i < nbr; i++) {
+            players[i]=newPlayer("Player "+ (i+1) + " ?", in);
+        }
         boolean isWin = false;
         boolean tie = false;
         System.out.println(grid.getLength());
         System.out.println(grid.getWidth());
         grid.draw();
+        int i =0;
         while (!isWin && !tie) {
-            int col = player1.Nextmove(grid, in);
-            int x = grid.turn(col, 'o');
-            while (x == -1) {
-                System.out.println("Coup incorrect");
+            for (i = 0; i < nbr; i++) {
+                int col = players[i].Nextmove(grid, in);
+                char pawn = (char) (65 +i);
+                int x = grid.turn(col,pawn);
+                while (x == -1) {
+                    System.out.println("Incorrect move");
+                    grid.draw();
+                    col = players[i].Nextmove(grid, in);
+                    x = grid.turn(col, pawn);
+                }
                 grid.draw();
-                col = player1.Nextmove(grid, in);
-                x = grid.turn(col, 'o');
-            }
-            grid.draw();
-            isWin = grid.win(x, col, 'o');
-            tie = grid.tie();
-            if (isWin || tie) {
-                break;
-            }
-            col = player2.Nextmove(grid, in);
-            x = grid.turn(col, 'x');
-            while (x == -1) {
-                System.out.println("Coup incorrect");
-                grid.draw();
-                col = player2.Nextmove(grid, in);
-                x = grid.turn(col, 'x');
-            }
+                isWin = grid.win(x, col, pawn);
+                tie = grid.tie();
+                if (isWin || tie) {
+                    break;
+                }
 
-            isWin = grid.win(x, col, 'x');
-            tie = grid.tie();
-
-            grid.draw();
-
+            }
         }
+        System.out.println("Good job "+players[i].GetNom());
         in.close();
 
     }

@@ -13,6 +13,10 @@ public class IARandom extends Player {
 
     public int Nextmove(Grid grille,Scanner in){
         Random rand = new Random();
-        return rand.nextInt(grille.getWidth()-1);
+        return rand.nextInt(grille.getWidth());
+    }
+
+    public String GetNom() {
+        return this.nom;
     }
 }
