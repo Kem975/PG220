@@ -6,11 +6,13 @@ public class Grid {
     private int width;
     private char[][] grid;
     private int empty_case;
+    private int winc;
 
-    public Grid(int length, int width) throws GridTailleException{
+    public Grid(int length, int width,int winc) throws GridTailleException{
         if (length >= 8 && width >= 7) {
             this.length = length;
             this.width = width;
+            this.winc = winc;
             this.grid = new char[this.length][this.width];
             for (int i = 0; i < length; i++) {
                 for (int j = 0; j < width; j++) {
@@ -49,19 +51,19 @@ public class Grid {
     public boolean win(int x, int y, char pion) {
         int count = 0;
         count = linearWin(x, y, 1, 0, pion) + linearWin(x, y, -1, 0, pion) + 1;
-        if (count >= 4) {
+        if (count >= this.winc) {
             return true;
         }
         count = linearWin(x, y, 0, 1, pion) + linearWin(x, y, 0, -1, pion) + 1;
-        if (count >= 4) {
+        if (count >= this.winc) {
             return true;
         }
         count = linearWin(x, y, 1, -1, pion) + linearWin(x, y, -1, 1, pion) + 1;
-        if (count >= 4) {
+        if (count >= this.winc) {
             return true;
         }
         count = linearWin(x, y, -1, -1, pion) + linearWin(x, y, 1, 1, pion) + 1;
-        if (count >= 4) {
+        if (count >= this.winc) {
             return true;
         }
         return false;

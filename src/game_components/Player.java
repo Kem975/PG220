@@ -5,11 +5,10 @@ import java.util.Scanner;
 
 public abstract class Player {
     protected String nom;
-    private int type;
+    //private int type;
 
-    public Player(String nom, int type){
+    public Player(String nom){
         this.nom = nom;
-        this.type = type;
     }
 
     public abstract int Nextmove(Grid grille,Scanner in);

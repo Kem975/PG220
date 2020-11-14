@@ -7,7 +7,7 @@ import game_components.Grid;
 public class Human extends Player {
 
     public Human(String name){
-        super(name, 0);
+        super(name);
     }
 
     public int Nextmove(Grid grille,Scanner in){

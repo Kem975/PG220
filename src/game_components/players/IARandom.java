@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class IARandom extends Player {
 
     public IARandom(String name){
-        super(name, 1);
+        super(name);
     }
 
     public int Nextmove(Grid grille,Scanner in){

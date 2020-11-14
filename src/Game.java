@@ -44,7 +44,11 @@ class Game {
 
             }
         }
-        System.out.println("Good job "+players[i].GetNom());
+        char pawn = (char) (i+65);
+        if (isWin)
+            System.out.println("Good job "+players[i].GetNom()+" with pawn " + pawn);
+        else
+            System.out.println("It's a tie!");
         in.close();
 
     }
@@ -82,7 +86,9 @@ class Game {
             int width = in.nextInt();
             System.out.println("Length of the grid:");
             int length = in.nextInt();
-            return new Grid(length, width);
+            System.out.println("Number of pawns to win:");
+            int winc = in.nextInt();
+            return new Grid(length, width,winc);
         }
     }
 }
