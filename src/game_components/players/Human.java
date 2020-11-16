@@ -6,8 +6,9 @@ import game_components.Grid;
 
 public class Human extends Player {
 
-    public Human(String name){
+    public Human(String name,char pawn){
         super(name);
+        this.pawn = pawn;
     }
 
     public int nextmove(Grid grille,Scanner in){
@@ -24,7 +25,7 @@ public class Human extends Player {
             return colonne-1;
         }
         else{
-            System.out.println("Colonne non valide\n");
+            System.out.println("Incorrect move");
             return nextmove(grille,in);
         }
     }
