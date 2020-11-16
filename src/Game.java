@@ -19,7 +19,7 @@ class Game {
         System.out.println(grid.getWidth());
         grid.draw();
         int i =0;
-        while (players[i].GetWin() == 3) {
+        while (!checkWin(players)) {
             for (i = 0; i < nbr; i++) {
                 int col = players[i].Nextmove(grid, in);
                 char pawn = (char) (65 +i);
@@ -39,23 +39,29 @@ class Game {
                         break;
                     else {
                         grid = new Grid(grid.getLength(),grid.getWidth(),grid.getWin());
-                        break;
+                        i=0;
                     }
                 }
                 tie = grid.tie();
                 if (tie) {
                     grid = new Grid(grid.getLength(),grid.getWidth(),grid.getWin());
-                    break;
+                    i=0;
                 }
             }
         }
         char pawn = (char) (i+65);
         if (isWin)
             System.out.println("Good job "+players[i].GetNom()+" with pawn " + pawn);
-        else
-            System.out.println("It's a tie!");
         in.close();
 
+    }
+
+    private static boolean checkWin(Player players[]) {
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].GetWin() == 3)
+                return true;
+        }
+        return false;
     }
 
 
