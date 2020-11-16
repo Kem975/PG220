@@ -29,7 +29,7 @@ public class Human extends Player {
         return this.win;
     }
 
-    public void incWin() {
+    public void IncWin() {
         this.win = this.win+1;
     }
 }

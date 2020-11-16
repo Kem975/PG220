@@ -117,6 +117,10 @@ public class Grid {
         return grid;
     }
 
+    public int getWin() {
+        return this.winc;
+    }
+
     public void setGrid(char[][] grid) {
         this.grid = grid;
     }
