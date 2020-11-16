@@ -19,4 +19,19 @@ public abstract class Player {
 
     public abstract void IncWin();
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getWin() {
+        return win;
+    }
+
+    public void setWin(int win) {
+        this.win = win;
+    }
 }
