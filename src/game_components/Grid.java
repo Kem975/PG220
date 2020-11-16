@@ -9,7 +9,7 @@ public class Grid {
     private int winc;
 
     public Grid(int length, int width,int winc) throws GridTailleException{
-        if (length >= 8 && width >= 7) {
+        if (length >= 4 && length %2 == 0 && width >= 7) {
             this.length = length;
             this.width = width;
             this.winc = winc;
