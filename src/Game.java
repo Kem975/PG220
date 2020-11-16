@@ -23,6 +23,7 @@ class Game {
         }
         
         Player players[] = new Player[nbr];
+        System.out.println("Chose the Player type :\n- human <name>\n- ia <name>");
         for (int i = 0; i < nbr; i++) {
             players[i]=newPlayer("Player "+ (i+1) + " ?", in,i);
             while(!same_name(players, i)){
@@ -123,6 +124,7 @@ class Game {
         int length;
         int winc;
         while (true) {
+            System.out.println("\n\n[WELCOME TO THE BEST CONNECT FOUR]\n\n");
             System.out.println("Width of the grid:");
             try {
                 width = Integer.parseInt(in.nextLine());
