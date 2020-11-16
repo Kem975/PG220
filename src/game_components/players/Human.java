@@ -10,26 +10,31 @@ public class Human extends Player {
         super(name);
     }
 
-    public int Nextmove(Grid grille,Scanner in){
-        int colonne = in.nextInt();
+    public int nextmove(Grid grille,Scanner in){
+        int colonne;
+        while (true) {
+            try {
+                colonne = Integer.parseInt(in.nextLine());
+                break;
+            }catch (NumberFormatException ex) {
+                System.out.println("Must be a number greater than 7.");
+            }
+        }
         if(colonne>0 && colonne<=grille.getWidth()){
             return colonne-1;
         }
         else{
             System.out.println("Colonne non valide\n");
-            return Nextmove(grille,in);
+            return nextmove(grille,in);
         }
     }
 
-    public String GetNom() {
-        return this.nom;
-    }
 
-    public int GetWin() {
+    public int getWin() {
         return this.win;
     }
 
-    public void IncWin() {
+    public void incWin() {
         this.win = this.win+1;
     }
 }

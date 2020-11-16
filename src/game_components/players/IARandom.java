@@ -11,20 +11,17 @@ public class IARandom extends Player {
         super(name);
     }
 
-    public int Nextmove(Grid grille,Scanner in){
+    public int nextmove(Grid grille,Scanner in){
         Random rand = new Random();
         return rand.nextInt(grille.getWidth());
     }
 
-    public String GetNom() {
-        return this.nom;
-    }
 
-    public int GetWin() {
+    public int getWin() {
         return this.win;
     }
 
-    public void IncWin() {
+    public void incWin() {
         this.win = this.win+1;
     }
 }

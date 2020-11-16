@@ -32,21 +32,21 @@ class Game {
         int i =0;
         while (!checkWin(players)) {
             for (i = 0; i < nbr; i++) {
-                int col = players[i].Nextmove(grid, in);
+                int col = players[i].nextmove(grid, in);
                 char pawn = (char) (65 +i);
                 int x = grid.turn(col,pawn);
                 while (x == -1) {
                     System.out.println("Incorrect move");
                     grid.draw();
-                    col = players[i].Nextmove(grid, in);
+                    col = players[i].nextmove(grid, in);
                     x = grid.turn(col, pawn);
                 }
                 grid.draw();
                 isWin = grid.win(x, col, pawn);
                 if (isWin) {
-                    players[i].IncWin();
-                    System.out.println("Good job "+players[i].GetNom()+" with pawn " + pawn);
-                    if (players[i].GetWin() == 3) 
+                    players[i].incWin();
+                    System.out.println("Good job "+players[i].getName()+" with pawn " + pawn);
+                    if (players[i].getWin() == 3) 
                         break;
                     else {
                         grid = new Grid(grid.getLength(),grid.getWidth(),grid.getWin());
@@ -62,14 +62,14 @@ class Game {
         }
         char pawn = (char) (i+65);
         if (isWin)
-            System.out.println("Good job "+players[i].GetNom()+" with pawn " + pawn);
+            System.out.println("Good job "+players[i].getName()+" with pawn " + pawn);
         in.close();
 
     }
 
     private static boolean checkWin(Player players[]) {
         for (int i = 0; i < players.length; i++) {
-            if (players[i].GetWin() == 3)
+            if (players[i].getWin() == 3)
                 return true;
         }
         return false;

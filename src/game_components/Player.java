@@ -4,27 +4,23 @@ import java.util.Scanner;
 
 
 public abstract class Player {
-    protected String nom;
+    protected String name;
     protected int win = 0;
 
-    public Player(String nom){
-        this.nom = nom;
+    public Player(String name){
+        this.name = name;
     }
 
-    public abstract int Nextmove(Grid grille,Scanner in);
+    public abstract int nextmove(Grid grid,Scanner in);
 
-    public abstract String GetNom();
+    public abstract void incWin();
 
-    public abstract int GetWin();
-
-    public abstract void IncWin();
-
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String nom) {
+        this.name = name;
     }
 
     public int getWin() {
