@@ -25,7 +25,7 @@ public class Human extends Player {
             return colonne-1;
         }
         else{
-            System.out.println("Colonne non valide\n");
+            System.out.println("Incorrect move");
             return nextmove(grille,in);
         }
     }
