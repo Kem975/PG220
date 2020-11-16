@@ -25,4 +25,11 @@ public class Human extends Player {
         return this.nom;
     }
 
+    public int GetWin() {
+        return this.win;
+    }
+
+    public void incWin() {
+        this.win = this.win+1;
+    }
 }

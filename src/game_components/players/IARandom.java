@@ -19,4 +19,12 @@ public class IARandom extends Player {
     public String GetNom() {
         return this.nom;
     }
+
+    public int GetWin() {
+        return this.win;
+    }
+
+    public void incWin() {
+        this.win = this.win+1;
+    }
 }

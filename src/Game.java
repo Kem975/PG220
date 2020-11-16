@@ -4,11 +4,6 @@ import game_components.players.*;
 import game_components.*;
 
 class Game {
-    /*
-     * private Grid grid; //private Set<Player> players; private static Player
-     * player1; private static Player player2;
-     */
-
     public static void main(String[] args) throws GridTailleException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
