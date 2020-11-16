@@ -25,7 +25,12 @@ class Game {
         Player players[] = new Player[nbr];
         for (int i = 0; i < nbr; i++) {
             players[i]=newPlayer("Player "+ (i+1) + " ?", in);
+            while(!same_name(players, i)){
+                System.out.println("This name is already taken");
+                players[i] = newPlayer("Player "+ (i+1) + " ?", in);
+            }
         }
+
         boolean isWin = false;
         boolean tie = false;
         grid.draw();
@@ -148,5 +153,15 @@ class Game {
         
         
         return new Grid(length, width,winc);
+    }
+
+    private static boolean same_name(Player players[], int idx){
+        Player player_to_add = players[idx];
+        for(int i = 0; i<idx; i++){
+            Player player = players[i];
+            if(player_to_add.getName().equals(player.getName()))
+                return false;
+        }
+        return true;
     }
 }
