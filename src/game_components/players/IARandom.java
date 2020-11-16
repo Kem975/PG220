@@ -17,10 +17,6 @@ public class IARandom extends Player {
     }
 
 
-    public int getWin() {
-        return this.win;
-    }
-
     public void incWin() {
         this.win = this.win+1;
     }
