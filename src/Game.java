@@ -7,16 +7,27 @@ class Game {
     public static void main(String[] args) throws GridTailleException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
-        System.out.println("Number of player ?");
-        int nbr = in.nextInt();
+        int nbr;
+
+        while (true) {
+            System.out.println("Number of player ?");
+            try {
+                nbr = Integer.parseInt(in.nextLine());
+                if (nbr >= 2)
+                    break;
+                else
+                    System.out.println("Must be a number greater than 2");
+            }catch (NumberFormatException ex) {
+                System.out.println("Must be a number greater than 2");
+            }
+        }
+        
         Player players[] = new Player[nbr];
         for (int i = 0; i < nbr; i++) {
             players[i]=newPlayer("Player "+ (i+1) + " ?", in);
         }
         boolean isWin = false;
         boolean tie = false;
-        System.out.println(grid.getLength());
-        System.out.println(grid.getWidth());
         grid.draw();
         int i =0;
         while (!checkWin(players)) {
@@ -92,15 +103,50 @@ class Game {
     }
 
     private static Grid newGrid(Scanner in) throws GridTailleException {
-        while (true) {
 
+        int width;
+        int length;
+        int winc;
+        while (true) {
             System.out.println("Width of the grid:");
-            int width = in.nextInt();
-            System.out.println("Length of the grid:");
-            int length = in.nextInt();
-            System.out.println("Number of pawns to win:");
-            int winc = in.nextInt();
-            return new Grid(length, width,winc);
+            try {
+                width = Integer.parseInt(in.nextLine());
+                if (width >= 7)
+                    break;
+                else
+                    System.out.println("Must be a number greater than 7.");
+            }catch (NumberFormatException ex) {
+                System.out.println("Must be a number greater than 7.");
+            }
         }
+
+        while (true) {
+            System.out.println("Length of the grid:");
+            try {
+                length = Integer.parseInt(in.nextLine());
+                if (length >= 4 && length %2 == 0)
+                    break;
+                else
+                    System.out.println("Must be a number greater than 4 and even.");
+            }catch (NumberFormatException ex) {
+                System.out.println("Must be a number greater than 4 and even.");
+            }
+        }
+
+        while (true) {
+            System.out.println("Number of pawns to win:");
+            try {
+                winc = Integer.parseInt(in.nextLine());
+                if (winc >= 3)
+                    break;
+                else
+                    System.out.println("Must be a number greater than 3");
+            }catch (NumberFormatException ex) {
+                System.out.println("Must be a number greater than 3");
+            }
+        }
+        
+        
+        return new Grid(length, width,winc);
     }
 }
