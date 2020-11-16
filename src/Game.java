@@ -24,10 +24,10 @@ class Game {
         
         Player players[] = new Player[nbr];
         for (int i = 0; i < nbr; i++) {
-            players[i]=newPlayer("Player "+ (i+1) + " ?", in);
+            players[i]=newPlayer("Player "+ (i+1) + " ?", in,i);
             while(!same_name(players, i)){
                 System.out.println("This name is already taken");
-                players[i] = newPlayer("Player "+ (i+1) + " ?", in);
+                players[i] = newPlayer("Player "+ (i+1) + " ?", in,i);
             }
         }
 
@@ -38,19 +38,18 @@ class Game {
         while (!checkWin(players)) {
             for (i = 0; i < nbr; i++) {
                 int col = players[i].nextmove(grid, in);
-                char pawn = (char) (65 +i);
-                int x = grid.turn(col,pawn);
+                int x = grid.turn(col,players[i].getPawn());
                 while (x == -1) {
                     System.out.println("Incorrect move");
                     grid.draw();
                     col = players[i].nextmove(grid, in);
-                    x = grid.turn(col, pawn);
+                    x = grid.turn(col, players[i].getPawn());
                 }
                 grid.draw();
-                isWin = grid.win(x, col, pawn);
+                isWin = grid.win(x, col, players[i].getPawn());
                 if (isWin) {
                     players[i].incWin();
-                    System.out.println("Good job "+players[i].getName()+" with pawn " + pawn);
+                    System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
                     if (players[i].getWin() == 3) 
                         break;
                     else {
@@ -65,9 +64,8 @@ class Game {
                 }
             }
         }
-        char pawn = (char) (i+65);
         if (isWin)
-            System.out.println("Good job "+players[i].getName()+" with pawn " + pawn);
+            System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
         in.close();
 
     }
@@ -81,7 +79,19 @@ class Game {
     }
 
 
-    private static Player newPlayer(String line, Scanner in) {
+    private static Player newPlayer(String line, Scanner in,int i) {
+        char pawn;
+        switch (i) {
+            case 0:
+                pawn = 'X';
+                break;
+            case 1:
+                pawn = 'O';
+                break;
+            default:
+                pawn = (char) (i + 65);
+                break;
+        }
         while (true) {
             System.out.println(line);
             String player = in.nextLine();
@@ -93,9 +103,9 @@ class Game {
                 continue;
             }
             if (mot[0].equals("human")) {
-                return new Human(mot[1]);
+                return new Human(mot[1],pawn);
             } else if (mot[0].equals("ia")) {
-                return new IARandom(mot[1]);
+                return new IARandom(mot[1],pawn);
             } else {
                 System.out.println("there");
                 System.out.println("You need to specify a player type.");
