@@ -9,6 +9,7 @@ public class Human extends Player {
     public Human(String name,char pawn){
         super(name);
         this.pawn = pawn;
+        this.type = 0;
     }
 
     public int nextmove(Grid grille,Scanner in){

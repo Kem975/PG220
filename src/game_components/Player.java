@@ -7,6 +7,7 @@ public abstract class Player {
     protected String name;
     protected int win = 0;
     protected char pawn;
+    protected int type;
 
     public Player(String name){
         this.name = name;
@@ -26,6 +27,10 @@ public abstract class Player {
 
     public char getPawn() {
         return pawn;
+    }
+
+    public int getType(){
+        return this.type;
     }
 
     public void setWin(int win) {

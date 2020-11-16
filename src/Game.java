@@ -1,14 +1,16 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 import game_components.players.*;
 import game_components.*;
 
 class Game {
-    public static void main(String[] args) throws GridTailleException {
+    public static void main(String[] args) throws GridTailleException, IOException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
         int nbr;
-
+        Log log = new Log();
+        log.reset();
         while (true) {
             System.out.println("Number of player ?");
             try {
@@ -23,13 +25,17 @@ class Game {
         }
         
         Player players[] = new Player[nbr];
-        System.out.println("Chose the Player type :\n- human <name>\n- ia <name>");
+        System.out.println("Choose the Player type :\n- human <name>\n- ia <name>");
         for (int i = 0; i < nbr; i++) {
-            players[i]=newPlayer("Player "+ (i+1) + " ?", in,i);
+            players[i]=newPlayer("Player "+ (i+1) + " ?", in,i,log);
             while(!same_name(players, i)){
                 System.out.println("This name is already taken");
-                players[i] = newPlayer("Player "+ (i+1) + " ?", in,i);
+                players[i] = newPlayer("Player "+ (i+1) + " ?", in,i,log);
             }
+        }
+
+        for (int i=0;i<nbr;i++){
+            log.writePlayer(i,players[i].getType(),players[i].getName());
         }
 
         boolean isWin = false;
@@ -46,21 +52,27 @@ class Game {
                     col = players[i].nextmove(grid, in);
                     x = grid.turn(col, players[i].getPawn());
                 }
+                log.writeTurn(col,i);
                 grid.draw();
                 isWin = grid.win(x, col, players[i].getPawn());
                 if (isWin) {
                     players[i].incWin();
                     System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
-                    if (players[i].getWin() == 3) 
+                    log.writeScoreNbr(players);
+                    if (players[i].getWin() == 3) {
+                        log.writeEnd();
                         break;
+                    }
                     else {
                         grid = new Grid(grid.getLength(),grid.getWidth(),grid.getWin());
+                        log.writeRoundBegin();
                         i=0;
                     }
                 }
                 tie = grid.tie();
                 if (tie) {
                     grid = new Grid(grid.getLength(),grid.getWidth(),grid.getWin());
+                    log.writeTie();
                     i=0;
                 }
             }
@@ -80,7 +92,7 @@ class Game {
     }
 
 
-    private static Player newPlayer(String line, Scanner in,int i) {
+    private static Player newPlayer(String line, Scanner in,int i, Log log) {
         char pawn;
         switch (i) {
             case 0:

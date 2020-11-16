@@ -10,88 +10,88 @@ public class Log {
     String path = "./log.txt";
     File file;
 
-    Log() throws IOException {
+    public Log() throws IOException {
         this.file = new File(this.path);
         this.file.createNewFile();
     }
-    void reset() throws FileNotFoundException {
+    public void reset() throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
         writer_log.print("");
         writer_log.close();
     }
 
-    void writePlayer(int player_nbr,int type, String name) throws FileNotFoundException {
+    public void writePlayer(int player_nbr,int type, String name) throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Joueur ");
-        writer_log.print(player_nbr);
+        writer_log.append("Joueur ");
+        writer_log.append(String.format("%d",player_nbr));
         if(type ==0) {
-            writer_log.print("est humain ");
+            writer_log.append("est humain ");
         }else{
-            writer_log.print("est ia ");
+            writer_log.append("est ia ");
         }
-        writer_log.print(name+"\n");
+        writer_log.append(name+"\n");
         writer_log.close();
     }
 
-    void writeRoundBegin() throws FileNotFoundException {
+    public void writeRoundBegin() throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Manche commence\n");
+        writer_log.append("Manche commence\n");
         writer_log.close();
     }
 
-    void writeTurn(int column, int player_nbr) throws FileNotFoundException {
+    public void writeTurn(int column, int player_nbr) throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Joueur "+player_nbr+" joue "+column+"\n");
+        writer_log.append(String.format("Joueur %d joue %d\n",player_nbr,column));
         writer_log.close();
     }
 
-    void writeWin(int player_nbr) throws FileNotFoundException {
+    public void writeWin(int player_nbr) throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Joueur "+player_nbr+" gagne\n");
+        writer_log.append(String.format("Joueur %d gagne\n",player_nbr));
         writer_log.close();
     }
 
-    void writeTie() throws FileNotFoundException {
+    public void writeTie() throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Egalite\n");
+        writer_log.append("Egalite\n");
         writer_log.close();
     }
 
-    void writeScoreNbr(Player[] players) throws FileNotFoundException {
+    public void writeScoreNbr(Player[] players) throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Score : ");
+        writer_log.append("Score : ");
         for(int i = 0; i< players.length-1;i++){
-            writer_log.print(players[i].getWin()+" - ");
+            writer_log.append(String.format("%d - ",players[i].getWin()));
         }
-        writer_log.print(players[players.length-1].getWin()+"\n");
+        writer_log.append(String.format("%d\n",players[players.length-1].getWin()));
         writer_log.close();
     }
 
-    void writeEnd() throws FileNotFoundException {
+    public void writeEnd() throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Partie finie\n");
+        writer_log.append("Partie finie\n");
         writer_log.close();
     }
 
-    void writeErrorName(int player_nbr) throws FileNotFoundException {
+    public void writeErrorName(int player_nbr) throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
         writer_log.print("Erreur saisie Joueur "+player_nbr+"\n");
         writer_log.close();
     }
 
-    void writeErrorColumnName(String column) throws FileNotFoundException {
+    public void writeErrorColumnName(String column) throws FileNotFoundException {
         PrintWriter writer_log = new PrintWriter(this.file);
         writer_log.print("Erreur saisie colonne "+column+"\n");
         writer_log.close();
     }
 
-    void writeErrorColumnNbr(int column) throws  FileNotFoundException{
+    public void writeErrorColumnNbr(int column) throws  FileNotFoundException{
         PrintWriter writer_log = new PrintWriter(this.file);
         writer_log.print("Erreur colonne non valide "+column+"\n");
         writer_log.close();
     }
 
-    void writeErrorColumnFull(int column) throws  FileNotFoundException{
+    public void writeErrorColumnFull(int column) throws  FileNotFoundException{
         PrintWriter writer_log = new PrintWriter(this.file);
         writer_log.print("Erreur colonne pleine "+column+"\n");
         writer_log.close();

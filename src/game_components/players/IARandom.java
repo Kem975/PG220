@@ -10,6 +10,7 @@ public class IARandom extends Player {
     public IARandom(String name,char pawn){
         super(name);
         this.pawn = pawn;
+        this.type = 1;
     }
 
     public int nextmove(Grid grille,Scanner in){
