@@ -19,10 +19,6 @@ public abstract class Player {
         return name;
     }
 
-    public void setName(String nom) {
-        this.name = name;
-    }
-
     public int getWin() {
         return win;
     }
