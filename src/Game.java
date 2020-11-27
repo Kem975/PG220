@@ -83,7 +83,12 @@ class Game {
         if (isWin)
             System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
         in.close();
-
+        for(int p=0;p<nbr;p++){
+            if(players[p].getType()==0){
+                Human human = (Human)players[p];
+                human.freeScanner();
+            }
+        }
     }
 
     private static boolean checkWin(Player players[]) {

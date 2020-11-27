@@ -9,19 +9,21 @@ import game_components.Log;
 public class Human extends Player {
 
     protected Log log;
+    protected Scanner sc;
 
     public Human(String name, char pawn, Log log) {
         super(name);
         this.pawn = pawn;
         this.type = 0;
         this.log = log;
+        this.sc = new Scanner(System.in,"UTF-8");
+
     }
 
     public int nextMove(Grid grille) {
         int colonne;
         while (true) {
-            Scanner sc = new Scanner(System.in,"UTF-8");
-            String line = sc.nextLine();
+            String line = this.sc.nextLine();
             try {
                 colonne = Integer.parseInt(line);
                 break;
@@ -45,5 +47,8 @@ public class Human extends Player {
         }
     }
 
+    public void freeScanner(){
+        this.sc.close();
+    }
 
 }
