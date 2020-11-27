@@ -3,11 +3,13 @@ import java.util.Scanner;
 
 import game_components.players.*;
 import game_components.*;
+import game_components.rule_set.*;
 
 class Game {
     public static void main(String[] args) throws GridTailleException, IOException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
+        Rules rules = newRules(in);
         int nbr;
         Log log = new Log();
         log.reset();
@@ -54,7 +56,7 @@ class Game {
                 }
                 log.writeTurn(col,i);
                 grid.draw();
-                isWin = grid.win(x, col, players[i].getPawn());
+                isWin = rules.IsWin(x, col, players[i].getPawn(), grid);
                 if (isWin) {
                     players[i].incWin();
                     System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
@@ -64,14 +66,14 @@ class Game {
                         break;
                     }
                     else {
-                        grid = new Grid(grid.getLength(),grid.getWidth(),grid.getWin());
+                        grid = new Grid(grid.getLength(),grid.getWidth());
                         log.writeRoundBegin();
                         i=0;
                     }
                 }
                 tie = grid.tie();
                 if (tie) {
-                    grid = new Grid(grid.getLength(),grid.getWidth(),grid.getWin());
+                    grid = new Grid(grid.getLength(),grid.getWidth());
                     log.writeTie();
                     i=0;
                 }
@@ -130,11 +132,29 @@ class Game {
         }
     }
 
+    private static Rules newRules(Scanner in){
+        int winc;
+
+        while (true) {
+            System.out.println("Number of pawns to win:");
+            try {
+                winc = Integer.parseInt(in.nextLine());
+                if (winc >= 3)
+                    break;
+                else
+                    System.out.println("Must be a number greater than 3");
+            }catch (NumberFormatException ex) {
+                System.out.println("Must be a number greater than 3");
+            }
+        }
+        return new Basic(winc);
+    }
+
+
     private static Grid newGrid(Scanner in) throws GridTailleException {
 
         int width;
         int length;
-        int winc;
         while (true) {
             System.out.println("\n\n[WELCOME TO THE BEST CONNECT FOUR]\n\n");
             System.out.println("Width of the grid:");
@@ -161,23 +181,11 @@ class Game {
                 System.out.println("Must be a number greater than 4 and even.");
             }
         }
-
-        while (true) {
-            System.out.println("Number of pawns to win:");
-            try {
-                winc = Integer.parseInt(in.nextLine());
-                if (winc >= 3)
-                    break;
-                else
-                    System.out.println("Must be a number greater than 3");
-            }catch (NumberFormatException ex) {
-                System.out.println("Must be a number greater than 3");
-            }
-        }
         
         
-        return new Grid(length, width,winc);
+        return new Grid(length, width);
     }
+
 
     private static boolean same_name(Player players[], int idx){
         Player player_to_add = players[idx];
