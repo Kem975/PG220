@@ -6,41 +6,35 @@ import game_components.Grid;
 
 public class Square extends Rules {
 
-    public Square(int pounds) {
-        super(pounds);
-    }
+    public Square() {}
 
     public int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid) {
-        int count = 0;
-        for (int i = 1; i < 4; i++) {
-            if (x + i * stepX < 0 || x + i * stepX > grid.getLength() - 1 || y + i * stepY < 0
-                    || y + i * stepY > grid.getWidth() - 1) {
-                return count;
-            }
-            if (grid.getGrid()[x + i * stepX][y + i * stepY] != pion) {
-                return count;
-            }
-            count++;
+        if (x + stepX < 0 || x + stepX > grid.getLength() - 1 || y + stepY < 0
+                || y + stepY > grid.getWidth() - 1) {
+            return 0;
         }
-        return count;
+        if (grid.getGrid()[x + stepX][y + stepY] != pion || grid.getGrid()[x + stepX][y] != pion || grid.getGrid()[x][y + stepY] != pion) {
+            return 0;
+        }
+        return 4;
     }
 
 
     public boolean IsWin(int x, int y, char pion, Grid grid) {
         int count = 0;
-        count = linearWin(x, y, 1, 0, pion, grid) + linearWin(x, y, -1, 0, pion, grid) + 1;
+        count = linearWin(x, y, 1, 1, pion, grid);
         if (count >= this.PawnsToWin) {
             return true;
         }
-        count = linearWin(x, y, 0, 1, pion, grid) + linearWin(x, y, 0, -1, pion, grid) + 1;
+        count = linearWin(x, y, -1, 1, pion, grid);
         if (count >= this.PawnsToWin) {
             return true;
         }
-        count = linearWin(x, y, 1, -1, pion, grid) + linearWin(x, y, -1, 1, pion, grid) + 1;
+        count = linearWin(x, y, 1, -1, pion, grid);
         if (count >= this.PawnsToWin) {
             return true;
         }
-        count = linearWin(x, y, -1, -1, pion, grid) + linearWin(x, y, 1, 1, pion, grid) + 1;
+        count = linearWin(x, y, -1, -1, pion, grid);
         if (count >= this.PawnsToWin) {
             return true;
         }
