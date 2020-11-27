@@ -12,7 +12,7 @@ public class Human extends Player {
         this.type = 0;
     }
 
-    public int nextmove(Grid grille){
+    public int nextMove(Grid grille){
         Scanner in = new Scanner(System.in);
         int colonne;
         while (true) {
@@ -29,7 +29,7 @@ public class Human extends Player {
         }
         else{
             System.out.println("Incorrect move");
-            return nextmove(grille);
+            return nextMove(grille);
         }
     }
 

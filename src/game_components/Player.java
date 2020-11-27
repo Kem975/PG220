@@ -12,7 +12,7 @@ public abstract class Player {
         this.name = name;
     }
 
-    public abstract int nextmove(Grid grid);
+    public abstract int nextMove(Grid grid);
 
     public void incWin() {
         this.win = this.win+1;
