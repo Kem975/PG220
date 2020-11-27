@@ -65,7 +65,7 @@ public class Log {
     }
 
     public void writeErrorColumnName(String column) throws IOException {
-        Files.write(Paths.get(this.path), String.format("Erreur saisie colonne %d\n", column).getBytes(),StandardOpenOption.APPEND);
+        Files.write(Paths.get(this.path), String.format("Erreur saisie colonne %s\n", column).getBytes(),StandardOpenOption.APPEND);
     }
 
     public void writeErrorColumnNbr(int column) throws IOException {
