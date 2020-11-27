@@ -12,7 +12,8 @@ public class Human extends Player {
         this.type = 0;
     }
 
-    public int nextmove(Grid grille,Scanner in){
+    public int nextmove(Grid grille){
+        Scanner in = new Scanner(System.in);
         int colonne;
         while (true) {
             try {
@@ -22,16 +23,15 @@ public class Human extends Player {
                 System.out.println("Must be a number greater than 7.");
             }
         }
+        in.close();
         if(colonne>0 && colonne<=grille.getWidth()){
             return colonne-1;
         }
         else{
             System.out.println("Incorrect move");
-            return nextmove(grille,in);
+            return nextmove(grille);
         }
     }
 
-    public void incWin() {
-        this.win = this.win+1;
-    }
+
 }

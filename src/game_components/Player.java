@@ -1,6 +1,5 @@
 package game_components;
 
-import java.util.Scanner;
 
 
 public abstract class Player {
@@ -13,9 +12,11 @@ public abstract class Player {
         this.name = name;
     }
 
-    public abstract int nextmove(Grid grid,Scanner in);
+    public abstract int nextmove(Grid grid);
 
-    public abstract void incWin();
+    public void incWin() {
+        this.win = this.win+1;
+    }
 
     public String getName() {
         return name;

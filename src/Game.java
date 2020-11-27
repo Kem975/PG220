@@ -44,12 +44,12 @@ class Game {
         int i =0;
         while (!checkWin(players)) {
             for (i = 0; i < nbr; i++) {
-                int col = players[i].nextmove(grid, in);
+                int col = players[i].nextmove(grid);
                 int x = grid.turn(col,players[i].getPawn());
                 while (x == -1) {
                     System.out.println("Incorrect move");
                     grid.draw();
-                    col = players[i].nextmove(grid, in);
+                    col = players[i].nextmove(grid);
                     x = grid.turn(col, players[i].getPawn());
                 }
                 log.writeTurn(col,i);

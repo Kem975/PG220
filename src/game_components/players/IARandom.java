@@ -3,7 +3,6 @@ package game_components.players;
 import java.util.Random;
 import game_components.Player;
 import game_components.Grid;
-import java.util.Scanner;
 
 public class IARandom extends Player {
 
@@ -13,13 +12,11 @@ public class IARandom extends Player {
         this.type = 1;
     }
 
-    public int nextmove(Grid grille,Scanner in){
+    public int nextmove(Grid grille){
         Random rand = new Random();
         return rand.nextInt(grille.getWidth());
     }
 
 
-    public void incWin() {
-        this.win = this.win+1;
-    }
+    
 }
