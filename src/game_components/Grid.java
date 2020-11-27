@@ -1,5 +1,7 @@
 package game_components;
 
+import java.io.IOException;
+
 public class Grid {
 
     private int length;
@@ -8,8 +10,8 @@ public class Grid {
     private int empty_case;
     private int winc;
 
-    public Grid(int length, int width) throws GridTailleException{
-        if (length >= 4 && length %2 == 0 && width >= 7) {
+    public Grid(int length, int width) throws GridTailleException {
+        if (length >= 4 && length % 2 == 0 && width >= 7) {
             this.length = length;
             this.width = width;
             this.grid = new char[this.length][this.width];
@@ -19,8 +21,7 @@ public class Grid {
                 }
             }
             this.empty_case = length * width;
-        }
-        else{
+        } else {
             throw new GridTailleException();
         }
     }
@@ -32,10 +33,7 @@ public class Grid {
         return false;
     }
 
-
-
-
-    public int turn(int column, char pion) {
+    public int turn(int column, char pion, Log log) throws IOException {
         if (column >= 0 && column < this.width) {
             for (int i = this.length - 1; i >= 0; i--) {
                 if (this.grid[i][column] == '.') {
@@ -44,6 +42,10 @@ public class Grid {
                     return i;
                 }
             }
+            log.writeErrorColumnFull(column);
+        }
+        else{
+            log.writeErrorColumnNbr(column);
         }
         return -1;
     }

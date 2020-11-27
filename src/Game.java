@@ -33,6 +33,7 @@ class Game {
             while(!same_name(players, i)){
                 System.out.println("This name is already taken");
                 players[i] = newPlayer("Player "+ (i+1) + " ?", in,i,log);
+                log.writeErrorName(i);
             }
         }
 
@@ -47,12 +48,12 @@ class Game {
         while (!checkWin(players)) {
             for (i = 0; i < nbr; i++) {
                 int col = players[i].nextMove(grid);
-                int x = grid.turn(col,players[i].getPawn());
+                int x = grid.turn(col,players[i].getPawn(),log);
                 while (x == -1) {
                     System.out.println("Incorrect move");
                     grid.draw();
                     col = players[i].nextMove(grid);
-                    x = grid.turn(col, players[i].getPawn());
+                    x = grid.turn(col, players[i].getPawn(),log);
                 }
                 log.writeTurn(col,i);
                 grid.draw();
@@ -112,13 +113,18 @@ class Game {
             String player = in.nextLine();
             String mot[] = player.split(" ");
             if (mot.length < 2) {
+                try {
+                    log.writeErrorName(i);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("You need to specify a player type.");
                 System.out.println("Example: human Joe");
                 System.out.println("Or: ia Bob");
                 continue;
             }
             if (mot[0].equals("human")) {
-                return new Human(mot[1],pawn);
+                return new Human(mot[1],pawn, log);
             } else if (mot[0].equals("ia")) {
                 return new IARandom(mot[1],pawn);
             } else {
