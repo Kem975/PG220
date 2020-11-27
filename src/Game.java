@@ -10,6 +10,19 @@ class Game {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
         Rules rules = newRules(in);
+        int nbRound;
+        while (true) {
+            System.out.println("Best of how many round?");
+            try {
+                nbRound = Integer.parseInt(in.nextLine());
+                if (nbRound > 0)
+                    break;
+                else
+                    System.out.println("Must be a positive number.");
+            }catch (NumberFormatException ex) {
+                System.out.println("Must be a positive number.");
+            }
+        }
         int nbr;
         Log log = new Log();
         log.reset();
@@ -45,7 +58,7 @@ class Game {
         boolean tie = false;
         grid.draw();
         int i =0;
-        while (!checkWin(players)) {
+        while (!checkWin(players,nbRound)) {
             for (i = 0; i < nbr; i++) {
                 int col = players[i].nextMove(grid);
                 int x = grid.turn(col,players[i].getPawn(),log);
@@ -62,7 +75,7 @@ class Game {
                     players[i].incWin();
                     System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
                     log.writeScoreNbr(players);
-                    if (players[i].getWin() == 3) {
+                    if (players[i].getWin() == nbRound) {
                         log.writeEnd();
                         break;
                     }
@@ -91,9 +104,9 @@ class Game {
         }
     }
 
-    private static boolean checkWin(Player players[]) {
+    private static boolean checkWin(Player players[],int nbRound) {
         for (int i = 0; i < players.length; i++) {
-            if (players[i].getWin() == 3)
+            if (players[i].getWin() == nbRound)
                 return true;
         }
         return false;
