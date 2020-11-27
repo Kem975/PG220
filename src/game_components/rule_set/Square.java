@@ -3,15 +3,16 @@ package game_components.rule_set;
 import game_components.Rules;
 import game_components.Grid;
 
-public class Basic extends Rules{
 
-    public Basic(int pawns) {
-        super(pawns);
+public class Square extends Rules {
+
+    public Square(int pounds) {
+        super(pounds);
     }
 
     public int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid) {
         int count = 0;
-        for (int i = 1; i < this.PawnsToWin; i++) {
+        for (int i = 1; i < 4; i++) {
             if (x + i * stepX < 0 || x + i * stepX > grid.getLength() - 1 || y + i * stepY < 0
                     || y + i * stepY > grid.getWidth() - 1) {
                 return count;
@@ -45,7 +46,5 @@ public class Basic extends Rules{
         }
         return false;
     }
-
-
 
 }

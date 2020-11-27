@@ -3,9 +3,9 @@ package game_components;
 
 
 public abstract class Rules {
-    public int PoundsToWin;
+    public int PawnsToWin;
 
-    public Rules(int pounds){this.PoundsToWin = pounds;}
+    public Rules(int pawns){this.PawnsToWin = pawns;}
 
     public abstract int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid);
 
@@ -13,10 +13,10 @@ public abstract class Rules {
 
 
     public int getPoundsToWin() {
-        return PoundsToWin;
+        return PawnsToWin;
     }
 
-    public void setPoundsToWin(int poundsToWin) {
-        PoundsToWin = poundsToWin;
+    public void setPoundsToWin(int pawnsToWin) {
+        PawnsToWin = pawnsToWin;
     }
 }
