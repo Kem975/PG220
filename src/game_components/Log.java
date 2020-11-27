@@ -1,99 +1,78 @@
 package game_components;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class Log {
 
     String path = "./log.txt";
-    File file;
 
     public Log() throws IOException {
-        this.file = new File(this.path);
-        this.file.createNewFile();
-    }
-    public void reset() throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("");
-        writer_log.close();
+        Files.deleteIfExists(Paths.get(this.path));
+        Files.createFile(Paths.get(this.path));
     }
 
-    public void writePlayer(int player_nbr,int type, String name) throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.append("Joueur ");
-        writer_log.append(String.format("%d",player_nbr));
-        if(type ==0) {
-            writer_log.append("est humain ");
-        }else{
-            writer_log.append("est ia ");
+    public void reset() throws IOException {
+        Files.write(Paths.get(this.path), "".getBytes(),StandardOpenOption.WRITE);
+    }
+
+
+    public void writePlayer(int player_nbr, int type, String name) throws IOException {
+        
+        String text = "Joueur "+String.format("%d", player_nbr);
+        if (type == 0) {
+            text = text+" est humain ";
+        } else {
+            text=text+" est ia ";
         }
-        writer_log.append(name+"\n");
-        writer_log.close();
+        text = text+"\n";
+        Files.write(Paths.get(this.path), text.getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeRoundBegin() throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.append("Manche commence\n");
-        writer_log.close();
+    public void writeRoundBegin() throws IOException {
+        Files.write(Paths.get(this.path), "Manche commence\n".getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeTurn(int column, int player_nbr) throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.append(String.format("Joueur %d joue %d\n",player_nbr,column));
-        writer_log.close();
+    public void writeTurn(int column, int player_nbr) throws IOException {
+        Files.write(Paths.get(this.path),String.format("Joueur %d joue %d\n", player_nbr, column).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeWin(int player_nbr) throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.append(String.format("Joueur %d gagne\n",player_nbr));
-        writer_log.close();
+    public void writeWin(int player_nbr) throws IOException {
+        Files.write(Paths.get(this.path),String.format("Joueur %d gagne\n", player_nbr).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeTie() throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.append("Egalite\n");
-        writer_log.close();
+    public void writeTie() throws IOException {
+        Files.write(Paths.get(this.path),"Egalite\n".getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeScoreNbr(Player[] players) throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.append("Score : ");
-        for(int i = 0; i< players.length-1;i++){
-            writer_log.append(String.format("%d - ",players[i].getWin()));
+    public void writeScoreNbr(Player[] players) throws IOException {
+        String text = "Score : ";
+        for (int i = 0; i < players.length - 1; i++) {
+            text = text+String.format("%d - ", players[i].getWin());
         }
-        writer_log.append(String.format("%d\n",players[players.length-1].getWin()));
-        writer_log.close();
+        text = text+String.format("%d\n", players[players.length - 1].getWin());
+        Files.write(Paths.get(this.path), text.getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeEnd() throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.append("Partie finie\n");
-        writer_log.close();
+    public void writeEnd() throws IOException {
+        Files.write(Paths.get(this.path), "Partie finie\n".getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeErrorName(int player_nbr) throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Erreur saisie Joueur "+player_nbr+"\n");
-        writer_log.close();
+    public void writeErrorName(int player_nbr) throws IOException {      
+        Files.write(Paths.get(this.path), String.format("Erreur saisie Joueur %d\n", player_nbr).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeErrorColumnName(String column) throws FileNotFoundException {
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Erreur saisie colonne "+column+"\n");
-        writer_log.close();
+    public void writeErrorColumnName(String column) throws IOException {
+        Files.write(Paths.get(this.path), String.format("Erreur saisie colonne %d\n", column).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeErrorColumnNbr(int column) throws  FileNotFoundException{
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Erreur colonne non valide "+column+"\n");
-        writer_log.close();
+    public void writeErrorColumnNbr(int column) throws IOException {
+        Files.write(Paths.get(this.path), String.format("Erreur colonne non valide %d\n", column).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeErrorColumnFull(int column) throws  FileNotFoundException{
-        PrintWriter writer_log = new PrintWriter(this.file);
-        writer_log.print("Erreur colonne pleine "+column+"\n");
-        writer_log.close();
+    public void writeErrorColumnFull(int column) throws IOException {
+        Files.write(Paths.get(this.path), String.format("Erreur colonne pleine %d\n", column).getBytes(),StandardOpenOption.APPEND);
     }
-}
+ }
