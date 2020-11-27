@@ -12,7 +12,7 @@ class Game {
         Rules rules = newRules(in);
         int nbRound;
         while (true) {
-            System.out.println("Best of how many round?");
+            System.out.println("Number of round won to win the game ?");
             try {
                 nbRound = Integer.parseInt(in.nextLine());
                 if (nbRound > 0)
