@@ -13,17 +13,18 @@ public class Human extends Player {
     }
 
     public int nextMove(Grid grille){
-        Scanner in = new Scanner(System.in);
         int colonne;
         while (true) {
+            Scanner sc = new Scanner(System.in);
             try {
-                colonne = Integer.parseInt(in.nextLine());
+                colonne = Integer.parseInt(sc.nextLine());
                 break;
             }catch (NumberFormatException ex) {
                 System.out.println("Must be a number greater than 7.");
             }
+            sc.close();
         }
-        in.close();
+
         if(colonne>0 && colonne<=grille.getWidth()){
             return colonne-1;
         }
