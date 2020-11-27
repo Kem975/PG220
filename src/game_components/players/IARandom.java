@@ -12,7 +12,7 @@ public class IARandom extends Player {
         this.type = 1;
     }
 
-    public int nextmove(Grid grille){
+    public int nextMove(Grid grille){
         Random rand = new Random();
         return rand.nextInt(grille.getWidth());
     }
