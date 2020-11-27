@@ -27,7 +27,7 @@ class Game {
         }
         
         Player players[] = new Player[nbr];
-        System.out.println("Choose the Player type :\n- human <name>\n- ia <name>");
+        System.out.println("Choose the Player type :\n- human <name>\n- ia <name>\n- ia:random <name>\n- ia:high <name>");
         for (int i = 0; i < nbr; i++) {
             players[i]=newPlayer("Player "+ (i+1) + " ?", in,i,log);
             while(!same_name(players, i)){
@@ -127,6 +127,10 @@ class Game {
                 return new Human(mot[1],pawn, log);
             } else if (mot[0].equals("ia")) {
                 return new IARandom(mot[1],pawn);
+            } else if (mot[0].equals("ia:random")) {
+                return new IARandom(mot[1],pawn); 
+            } else if (mot[0].equals("ia:high")) {
+                return new IAHighestBid(mot[1],pawn); 
             } else {
                 System.out.println("there");
                 System.out.println("You need to specify a player type.");

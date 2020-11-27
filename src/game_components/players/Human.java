@@ -20,20 +20,20 @@ public class Human extends Player {
     public int nextMove(Grid grille) {
         int colonne;
         while (true) {
-            Scanner sc = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in,"UTF-8");
             String line = sc.nextLine();
             try {
                 colonne = Integer.parseInt(line);
                 break;
             } catch (NumberFormatException ex) {
-                System.out.println("Must be a number greater than 7.");
+                System.out.println("Must be a number.");
                 try {
                     this.log.writeErrorColumnName(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            sc.close();
+            System.out.println("Here");
         }
 
         if(colonne>0 && colonne<=grille.getWidth()){

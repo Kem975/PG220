@@ -1,6 +1,6 @@
 package game_components;
 
-import game_components.Grid;
+
 
 public abstract class Rules {
     public int PoundsToWin;
