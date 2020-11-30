@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import game_components.graphic_display.Window;
 import game_components.players.*;
 import game_components.*;
 import game_components.rule_set.*;
@@ -10,6 +11,7 @@ class Game {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
         Rules rules = newRules(in);
+        boolean graphic_display = false;
         int nbRound;
         while (true) {
             System.out.println("Number of round won to win the game ?");
@@ -53,43 +55,55 @@ class Game {
         for (int i=0;i<nbr;i++){
             log.writePlayer(i,players[i].getType(),players[i].getName());
         }
+        int i =0;
+        System.out.println("Do you want to use the graphic display ? Y/N");
+        String[] graphic = in.nextLine().split("\n");
+        System.out.print(graphic[0]);
+        if(graphic[0].equals("Y") | graphic[0].equals("y")){
+            graphic_display = true;
+        }
 
         boolean isWin = false;
         boolean tie = false;
-        grid.draw();
-        int i =0;
-        while (!checkWin(players,nbRound)) {
-            for (i = 0; i < nbr; i++) {
-                int col = players[i].nextMove(grid);
-                int x = grid.turn(col,players[i].getPawn(),log);
-                while (x == -1) {
-                    System.out.println("Incorrect move");
+
+        if(graphic_display){
+            new Window();
+        }
+
+        else {
+            grid.draw();
+            while (!checkWin(players, nbRound)) {
+                for (i = 0; i < nbr; i++) {
+                    int col = players[i].nextMove(grid);
+                    int x = grid.turn(col, players[i].getPawn(), log);
+                    while (x == -1) {
+                        System.out.println("Incorrect move");
+                        grid.draw();
+                        col = players[i].nextMove(grid);
+                        x = grid.turn(col, players[i].getPawn(), log);
+                    }
+                    log.writeTurn(col, i);
                     grid.draw();
-                    col = players[i].nextMove(grid);
-                    x = grid.turn(col, players[i].getPawn(),log);
-                }
-                log.writeTurn(col,i);
-                grid.draw();
-                isWin = rules.IsWin(x, col, players[i].getPawn(), grid);
-                if (isWin) {
-                    players[i].incWin();
-                    System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
-                    log.writeScoreNbr(players);
-                    if (players[i].getWin() == nbRound) {
-                        log.writeEnd();
-                        break;
+                    isWin = rules.IsWin(x, col, players[i].getPawn(), grid);
+                    if (isWin) {
+                        players[i].incWin();
+                        System.out.println("Good job " + players[i].getName() + " with pawn " + players[i].getPawn());
+                        log.writeScoreNbr(players);
+                        if (players[i].getWin() == nbRound) {
+                            log.writeEnd();
+                            break;
+                        } else {
+                            grid = new Grid(grid.getLength(), grid.getWidth());
+                            log.writeRoundBegin();
+                            i = 0;
+                        }
                     }
-                    else {
-                        grid = new Grid(grid.getLength(),grid.getWidth());
-                        log.writeRoundBegin();
-                        i=0;
+                    tie = grid.tie();
+                    if (tie) {
+                        grid = new Grid(grid.getLength(), grid.getWidth());
+                        log.writeTie();
+                        i = 0;
                     }
-                }
-                tie = grid.tie();
-                if (tie) {
-                    grid = new Grid(grid.getLength(),grid.getWidth());
-                    log.writeTie();
-                    i=0;
                 }
             }
         }
