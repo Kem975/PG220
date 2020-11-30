@@ -6,6 +6,7 @@ public abstract class Rules {
     public int PawnsToWin;
 
     public Rules(int pawns){this.PawnsToWin = pawns;}
+    public Rules(){this.PawnsToWin = 4;}
 
     public abstract int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid);
 

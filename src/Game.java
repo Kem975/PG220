@@ -176,20 +176,28 @@ class Game {
 
     private static Rules newRules(Scanner in){
         int winc;
+        String type;
 
         while (true) {
-            System.out.println("Number of pawns to win:");
-            try {
-                winc = Integer.parseInt(in.nextLine());
-                if (winc >= 3)
-                    break;
-                else
+            System.out.println("Select a rule type :");
+            System.out.println("    - Basic");
+            System.out.println("    - Square");
+            type = in.nextLine();
+            if (type.equals("Square"))
+                return new Square();
+            else if (type.equals("Basic")) {
+                System.out.println("Number of pawns to win:");
+                try {
+                    winc = Integer.parseInt(in.nextLine());
+                    if (winc >= 3) {
+                        return new Basic(winc);
+                    }else
+                        System.out.println("Must be a number greater than 3");
+                } catch (NumberFormatException ex) {
                     System.out.println("Must be a number greater than 3");
-            }catch (NumberFormatException ex) {
-                System.out.println("Must be a number greater than 3");
+                }
             }
         }
-        return new Basic(winc);
     }
 
 
