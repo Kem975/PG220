@@ -1,6 +1,6 @@
 package game_components.rule_set;
 
-import game_components.Rules;
+import game_components.rule_set.Rules;
 import game_components.Grid;
 
 public class Basic extends Rules{
@@ -9,7 +9,7 @@ public class Basic extends Rules{
         super(pawns);
     }
 
-    public int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid) {
+    int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid) {
         int count = 0;
         for (int i = 1; i < this.PawnsToWin; i++) {
             if (x + i * stepX < 0 || x + i * stepX > grid.getLength() - 1 || y + i * stepY < 0

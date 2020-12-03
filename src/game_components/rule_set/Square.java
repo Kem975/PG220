@@ -1,6 +1,6 @@
 package game_components.rule_set;
 
-import game_components.Rules;
+import game_components.rule_set.Rules;
 import game_components.Grid;
 
 
@@ -8,7 +8,7 @@ public class Square extends Rules {
 
     public Square() {}
 
-    public int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid) {
+    int linearWin(int x, int y, int stepX, int stepY, char pion, Grid grid) {
         if (x + stepX < 0 || x + stepX > grid.getLength() - 1 || y + stepY < 0
                 || y + stepY > grid.getWidth() - 1) {
             return 0;
