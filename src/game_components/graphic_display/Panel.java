@@ -13,7 +13,7 @@ public class Panel extends JPanel implements Runnable{
     private Thread thread;
     private final Grid grid;
 
-    private static int blockSize = 50;
+    private final int blockSize = 50;
 
     private boolean running = false;
     private BufferedImage img;
@@ -46,9 +46,9 @@ public class Panel extends JPanel implements Runnable{
         img = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
         graphics = (Graphics2D) img.getGraphics();
 
-        mouse = new MouseHandler();
+        mouse = new MouseHandler(this);
 
-        gsm = new GameStateManager();
+        gsm = new GameStateManager(grid);
     }
 
     public void run(){
@@ -119,14 +119,6 @@ public class Panel extends JPanel implements Runnable{
 
     public void render(){
         if(graphics !=null){
-            graphics.setColor(new Color(4, 45, 120));
-            graphics.fillRect(0,0,width,height);
-            graphics.setColor(new Color(255,255,255));
-            for(int i = 0; i<grid.getWidth();i++){
-                for(int j=0;j<grid.getLength();j++){
-                    graphics.fillOval(i*blockSize,j*blockSize,blockSize,blockSize);
-                }
-            }
             gsm.render(graphics);
         }
     }
