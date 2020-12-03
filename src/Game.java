@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.Arrays;
 
 import game_components.graphic_display.GraphicDisplay;
-import game_components.graphic_display.Window;
 import game_components.players.*;
 import game_components.*;
 import game_components.rule_set.*;
@@ -21,16 +19,8 @@ class Game {
         Log log = new Log();
         log.reset();
         
-        Player players[] = new Player[nbr];
-        System.out.println("Choose the Player type :\n- human <name>\n- ia <name>\n- ia:random <name>\n- ia:high <name>");
-        for (int i = 0; i < nbr; i++) {
-            players[i]=newPlayer("Player "+ (i+1) + " ?", in,i,log);
-            while(!sameName(players, i)){
-                System.out.println("This name is already taken");
-                players[i] = newPlayer("Player "+ (i+1) + " ?", in,i,log);
-                log.writeErrorName(i);
-            }
-        }
+        Player[] players = makePlayers(nbr,in,log);
+        
 
         for (int i=0;i<nbr;i++){
             log.writePlayer(i,players[i].getType(),players[i].getName());
@@ -69,6 +59,8 @@ class Game {
                         }
                     }
                     if (isWin) {
+
+                        
                         players[i].incWin();
                         System.out.println("Good job " + players[i].getName() + " with pawn " + players[i].getPawn());
                         log.writeScoreNbr(players);
@@ -112,7 +104,21 @@ class Game {
         }
         return false;
     }
+    
 
+    private static Player[] makePlayers(int nbr,Scanner in, Log log) throws IOException {
+        Player players[] = new Player[nbr];
+        System.out.println("Choose the Player type :\n- human <name>\n- ia <name>\n- ia:random <name>\n- ia:high <name>");
+        for (int i = 0; i < nbr; i++) {
+            players[i]=newPlayer("Player "+ (i+1) + " ?", in,i,log);
+            while(!sameName(players, i)){
+                System.out.println("This name is already taken");
+                players[i] = newPlayer("Player "+ (i+1) + " ?", in,i,log);
+                log.writeErrorName(i);
+            }
+        }
+        return players;
+    }
 
     private static Player newPlayer(String line, Scanner in,int i, Log log) {
         char pawn;
