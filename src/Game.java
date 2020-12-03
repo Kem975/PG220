@@ -13,40 +13,18 @@ class Game {
         Grid grid = newGrid(in);
         Rules rules = newRules(in);
         boolean graphic_display = false;
-        int nbRound;
-        while (true) {
-            System.out.println("Number of round won to win the game ?");
-            try {
-                nbRound = Integer.parseInt(in.nextLine());
-                if (nbRound > 0)
-                    break;
-                else
-                    System.out.println("Must be a positive number.");
-            }catch (NumberFormatException ex) {
-                System.out.println("Must be a positive number.");
-            }
-        }
-        int nbr;
+        int nbRound = checkInputInt(in, "Number of round won to win the game ?", "Must be a positive number.", 0);
+
+        int nbr = checkInputInt(in, "Number of player ?", "Must be a number greater than 2", 2);
+        
         Log log = new Log();
         log.reset();
-        while (true) {
-            System.out.println("Number of player ?");
-            try {
-                nbr = Integer.parseInt(in.nextLine());
-                if (nbr >= 2)
-                    break;
-                else
-                    System.out.println("Must be a number greater than 2");
-            }catch (NumberFormatException ex) {
-                System.out.println("Must be a number greater than 2");
-            }
-        }
         
         Player players[] = new Player[nbr];
         System.out.println("Choose the Player type :\n- human <name>\n- ia <name>\n- ia:random <name>\n- ia:high <name>");
         for (int i = 0; i < nbr; i++) {
             players[i]=newPlayer("Player "+ (i+1) + " ?", in,i,log);
-            while(!same_name(players, i)){
+            while(!sameName(players, i)){
                 System.out.println("This name is already taken");
                 players[i] = newPlayer("Player "+ (i+1) + " ?", in,i,log);
                 log.writeErrorName(i);
@@ -111,9 +89,13 @@ class Game {
         if (isWin)
             System.out.println("Good job "+players[i].getName()+" with pawn " + players[i].getPawn());
         in.close();
-        for(int p=0;p<nbr;p++){
-            if(players[p].getType()==0){
-                Human human = (Human)players[p];
+        freeAll(nbr,players);
+    }
+
+    private static void freeAll(int nbr,Player players[]) {
+        for (int p = 0; p < nbr; p++) {
+            if (players[p].getType() == 0) {
+                Human human = (Human) players[p];
                 human.freeScanner();
             }
         }
@@ -203,22 +185,10 @@ class Game {
 
 
     private static Grid newGrid(Scanner in) throws GridTailleException {
+        System.out.println("\n\n[WELCOME TO THE BEST CONNECT FOUR]\n\n");
 
-        int width;
+        int width = checkInputInt(in,"Width of the grid:","Must be a number greater than 7.",7);
         int length;
-        while (true) {
-            System.out.println("\n\n[WELCOME TO THE BEST CONNECT FOUR]\n\n");
-            System.out.println("Width of the grid:");
-            try {
-                width = Integer.parseInt(in.nextLine());
-                if (width >= 7)
-                    break;
-                else
-                    System.out.println("Must be a number greater than 7.");
-            }catch (NumberFormatException ex) {
-                System.out.println("Must be a number greater than 7.");
-            }
-        }
 
         while (true) {
             System.out.println("Length of the grid:");
@@ -238,7 +208,7 @@ class Game {
     }
 
 
-    private static boolean same_name(Player players[], int idx){
+    private static boolean sameName(Player players[], int idx){
         Player player_to_add = players[idx];
         for(int i = 0; i<idx; i++){
             Player player = players[i];
@@ -246,5 +216,22 @@ class Game {
                 return false;
         }
         return true;
+    }
+
+    private static int checkInputInt(Scanner in, String str1, String str2, int gt) {
+        int number;
+        while (true) {
+            System.out.println(str1);
+            try {
+                number = Integer.parseInt(in.nextLine());
+                if (number > gt)
+                    break;
+                else
+                    System.out.println(str2);
+            } catch (NumberFormatException ex) {
+                System.out.println(str2);
+            }
+        }
+        return number;
     }
 }
