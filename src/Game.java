@@ -36,7 +36,7 @@ class Game {
         boolean tie = false;
 
         if(graphic_display){
-            new GraphicDisplay(grid, players);
+            new GraphicDisplay(grid, players,nbRound,rules);
         }
 
         else {

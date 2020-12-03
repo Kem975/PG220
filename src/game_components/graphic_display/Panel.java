@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import game_components.Grid;
 import game_components.Player;
 import game_components.graphic_display.states.GameStateManager;
+import game_components.rule_set.Rules;
 
 public class Panel extends JPanel implements Runnable{
 
@@ -14,6 +15,8 @@ public class Panel extends JPanel implements Runnable{
     private Thread thread;
     private final Grid grid;
     private final Player[] players;
+    private final int nbRound;
+    private Rules[] rules;
 
     private final int blockSize = 50;
 
@@ -24,11 +27,13 @@ public class Panel extends JPanel implements Runnable{
 
     private GameStateManager gsm;
 
-    public Panel(Grid grid, Player[] players){
+    public Panel(Grid grid, Player[] players,int nbRound, Rules[] rules){
         this.width = grid.getWidth()*blockSize;
         this.height = grid.getLength()*blockSize;
         this.grid = grid;
         this.players = players;
+        this.nbRound=nbRound;
+        this.rules =rules;
         setPreferredSize(new Dimension(width,height));
         setFocusable(true);
         requestFocus();
@@ -51,7 +56,7 @@ public class Panel extends JPanel implements Runnable{
 
         mouse = new MouseHandler(this);
 
-        gsm = new GameStateManager(grid, players);
+        gsm = new GameStateManager(grid, players,nbRound,rules);
     }
 
     public void run(){
