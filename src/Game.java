@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Arrays;
 
 import game_components.graphic_display.GraphicDisplay;
 import game_components.graphic_display.Window;
@@ -11,7 +12,7 @@ class Game {
     public static void main(String[] args) throws GridTailleException, IOException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
-        Rules rules = newRules(in);
+        Rules[] rules = newRules(in);
         boolean graphic_display = false;
         int nbRound = checkInputInt(in, "Number of round won to win the game ?", "Must be a positive number.", 0);
 
@@ -37,7 +38,6 @@ class Game {
         int i =0;
         System.out.println("Do you want to use the graphic display ? Y/N");
         String[] graphic = in.nextLine().split("\n");
-        System.out.print(graphic[0]);
         if(graphic[0].equals("Y") | graphic[0].equals("y")){
             graphic_display = true;
         }
@@ -63,7 +63,11 @@ class Game {
                     }
                     log.writeTurn(col, i);
                     grid.draw();
-                    isWin = rules.IsWin(x, col, players[i].getPawn(), grid);
+                    for(int k = 0; k < rules.length;k++){
+                        if(isWin = rules[k].IsWin(x, col, players[i].getPawn(), grid)){
+                            break;
+                        }
+                    }
                     if (isWin) {
                         players[i].incWin();
                         System.out.println("Good job " + players[i].getName() + " with pawn " + players[i].getPawn());
@@ -157,7 +161,7 @@ class Game {
         }
     }
 
-    private static Rules newRules(Scanner in){
+    private static Rules[] newRules(Scanner in){
         int winc;
         String type;
 
@@ -165,16 +169,35 @@ class Game {
             System.out.println("Select a rule type :");
             System.out.println("    - Basic");
             System.out.println("    - Square");
+            System.out.println("    - Both");
             type = in.nextLine();
-            if (type.equals("Square"))
-                return new Square();
-            else if (type.equals("Basic")) {
+            if (type.equals("Square")) {
+                Rules[] rule_set = new Rules[1];
+                rule_set[0] = new Square();
+                return rule_set;
+            }else if (type.equals("Basic")) {
                 System.out.println("Number of pawns to win:");
                 try {
                     winc = Integer.parseInt(in.nextLine());
                     if (winc >= 3) {
-                        return new Basic(winc);
+                        Rules[] rule_set = new Rules[1];
+                        rule_set[0] = new Basic(winc);
+                        return rule_set;
                     }else
+                        System.out.println("Must be a number greater than 3");
+                } catch (NumberFormatException ex) {
+                    System.out.println("Must be a number greater than 3");
+                }
+            }else if (type.equals("Both")) {
+                System.out.println("Number of pawns to win:");
+                try {
+                    winc = Integer.parseInt(in.nextLine());
+                    if (winc >= 3) {
+                        Rules[] rule_set = new Rules[2];
+                        rule_set[0] = new Square();
+                        rule_set[1] = new Basic(winc);
+                        return rule_set;
+                    } else
                         System.out.println("Must be a number greater than 3");
                 } catch (NumberFormatException ex) {
                     System.out.println("Must be a number greater than 3");
@@ -224,7 +247,7 @@ class Game {
             System.out.println(str1);
             try {
                 number = Integer.parseInt(in.nextLine());
-                if (number > gt)
+                if (number >= gt)
                     break;
                 else
                     System.out.println(str2);
