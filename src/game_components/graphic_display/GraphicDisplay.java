@@ -5,8 +5,10 @@ import game_components.Grid;
 public class GraphicDisplay {
 
     Grid grid;
+    Window window;
 
-    GraphicDisplay(Grid grid){
+    public GraphicDisplay(Grid grid){
         this.grid = grid;
+        this.window = new Window();
     }
 }

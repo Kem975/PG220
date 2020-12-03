@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import game_components.graphic_display.GraphicDisplay;
 import game_components.graphic_display.Window;
 import game_components.players.*;
 import game_components.*;
@@ -67,7 +68,7 @@ class Game {
         boolean tie = false;
 
         if(graphic_display){
-            new Window();
+            new GraphicDisplay(grid);
         }
 
         else {

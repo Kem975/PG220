@@ -8,7 +8,7 @@ public class Window extends JFrame{
         setTitle("Connect 4");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
-        setContentPane(new Panel(256,256));
+        setContentPane(new Panel(512,512));
         setLocationRelativeTo(null);
         setVisible(true);
     }
