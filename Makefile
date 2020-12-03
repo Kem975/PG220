@@ -5,6 +5,7 @@ all: clean
 	javac -d build -cp build src/game_components/rule_set/*.java
 	javac -d build -cp build src/game_components/players/*.java
 	javac -d build -cp build src/game_components/Log.java
+	javac -d build -cp build src/game_components/graphic_display/states/*.java src/game_components/graphic_display/*.java
 	javac -d build -cp build src/game_components/graphic_display/*.java
 	javac -d build -cp build src/Game.java
 	java -cp build Game

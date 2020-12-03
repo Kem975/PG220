@@ -4,11 +4,9 @@ import game_components.Grid;
 
 public class GraphicDisplay {
 
-    Grid grid;
     Window window;
 
     public GraphicDisplay(Grid grid){
-        this.grid = grid;
-        this.window = new Window();
+        this.window = new Window(grid);
     }
 }
