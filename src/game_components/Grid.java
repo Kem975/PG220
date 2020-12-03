@@ -69,9 +69,6 @@ public class Grid {
         return length;
     }
 
-    public void setLength(int length) {
-        this.length = length;
-    }
 
     public int getWidth() {
         return width;
@@ -85,11 +82,8 @@ public class Grid {
         return grid;
     }
 
-    public int getWin() {
-        return this.winc;
+    public int getWinc() {
+        return winc;
     }
 
-    public void setGrid(char[][] grid) {
-        this.grid = grid;
-    }
 }
