@@ -1,6 +1,7 @@
 package game_components.graphic_display.states;
 
 import game_components.Grid;
+import game_components.Player;
 import game_components.graphic_display.MouseHandler;
 
 import java.awt.*;
@@ -12,11 +13,12 @@ public class GameStateManager {
     public static final int PLAY = 0;
     public static final int WIN = 1;
     private Grid grid;
+    private Player[] players;
 
-    public GameStateManager(Grid grid){
+    public GameStateManager(Grid grid, Player[] players){
         states = new ArrayList<GameState>();
 
-        states.add(new PlayState(this, grid));
+        states.add(new PlayState(this, grid,players));
     }
 
     public void pop(int state){
@@ -25,10 +27,10 @@ public class GameStateManager {
 
     public void add(int state){
         if(state== PLAY){
-            states.add(new PlayState(this, this.grid));
+            states.add(new PlayState(this, this.grid,players));
         }
         if(state == WIN){
-            states.add(new WinState(this,grid));
+            states.add(new WinState(this,grid,players));
         }
     }
 

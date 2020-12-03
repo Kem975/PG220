@@ -9,9 +9,18 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
     private static int mouseX = -1;
     private static int mouseY = -1;
     private static int mouseB = -1;
+    private static boolean mouseClicked = false;
 
     public MouseHandler(Panel panel){
         panel.addMouseListener(this);
+    }
+
+    public boolean isClicked() {
+        if (mouseClicked){
+            this.mouseUnclicked();
+            return true;
+        }
+        return false;
     }
 
     public int getX(){
@@ -26,9 +35,15 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
         return mouseB;
     }
 
+    public void mouseUnclicked(){
+        mouseClicked=false;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        mouseX = e.getX();
+        mouseY = e.getY();
+        mouseClicked = true;
     }
 
     @Override

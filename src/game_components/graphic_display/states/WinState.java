@@ -1,14 +1,15 @@
 package game_components.graphic_display.states;
 
 import game_components.Grid;
+import game_components.Player;
 import game_components.graphic_display.MouseHandler;
 
 import java.awt.*;
 
 public class WinState extends GameState {
 
-    public WinState(GameStateManager gsm, Grid grid){
-        super(gsm,grid);
+    public WinState(GameStateManager gsm, Grid grid, Player[] players){
+        super(gsm,grid,players);
     }
 
     public void update(){

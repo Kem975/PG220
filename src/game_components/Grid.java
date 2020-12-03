@@ -50,6 +50,19 @@ public class Grid {
         return -1;
     }
 
+    public int turnNoLog(int column, char pion){
+        if (column >= 0 && column < this.width) {
+            for (int i = this.length - 1; i >= 0; i--) {
+                if (this.grid[i][column] == '.') {
+                    this.grid[i][column] = pion;
+                    this.empty_case--;
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
     public void draw() {
         for (int i = 0; i < this.width; i++) {
             System.out.print(i + 1);
