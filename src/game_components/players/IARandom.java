@@ -7,9 +7,7 @@ import game_components.Grid;
 public class IARandom extends Player {
 
     public IARandom(String name,char pawn){
-        super(name);
-        this.pawn = pawn;
-        this.type = 1;
+        super(name,pawn,1);
     }
 
     public int nextMove(Grid grille){

@@ -3,13 +3,15 @@ package game_components;
 
 
 public abstract class Player {
-    protected String name;
-    protected int win = 0;
-    protected char pawn;
-    protected int type;
+    String name;
+    int win = 0;
+    char pawn;
+    int type;
 
-    public Player(String name){
+    public Player(String name,char pawn,int type){
         this.name = name;
+        this.pawn = pawn;
+        this.type = type;
     }
 
     public abstract int nextMove(Grid grid);
@@ -34,7 +36,7 @@ public abstract class Player {
         return this.type;
     }
 
-    public void setWin(int win) {
+    void setWin(int win) {
         this.win = win;
     }
 }

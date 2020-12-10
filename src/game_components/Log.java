@@ -9,12 +9,12 @@ public class Log {
 
     String path = "./log.txt";
 
-    public Log() throws IOException {
+    Log() throws IOException {
         Files.deleteIfExists(Paths.get(this.path));
         Files.createFile(Paths.get(this.path));
     }
 
-    public void reset() throws IOException {
+    void reset() throws IOException {
         Files.write(Paths.get(this.path), "".getBytes(),StandardOpenOption.WRITE);
     }
 
@@ -31,23 +31,23 @@ public class Log {
         Files.write(Paths.get(this.path), text.getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeRoundBegin() throws IOException {
+    void writeRoundBegin() throws IOException {
         Files.write(Paths.get(this.path), "Manche commence\n".getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeTurn(int column, int player_nbr) throws IOException {
+    void writeTurn(int column, int player_nbr) throws IOException {
         Files.write(Paths.get(this.path),String.format("Joueur %d joue %d\n", player_nbr, column).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeWin(int player_nbr) throws IOException {
+    void writeWin(int player_nbr) throws IOException {
         Files.write(Paths.get(this.path),String.format("Joueur %d gagne\n", player_nbr).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeTie() throws IOException {
+    void writeTie() throws IOException {
         Files.write(Paths.get(this.path),"Egalite\n".getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeScoreNbr(Player[] players) throws IOException {
+    void writeScoreNbr(Player[] players) throws IOException {
         String text = "Score : ";
         for (int i = 0; i < players.length - 1; i++) {
             text = text+String.format("%d - ", players[i].getWin());
@@ -56,11 +56,11 @@ public class Log {
         Files.write(Paths.get(this.path), text.getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeEnd() throws IOException {
+    void writeEnd() throws IOException {
         Files.write(Paths.get(this.path), "Partie finie\n".getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeErrorName(int player_nbr) throws IOException {      
+    void writeErrorName(int player_nbr) throws IOException {      
         Files.write(Paths.get(this.path), String.format("Erreur saisie Joueur %d\n", player_nbr).getBytes(),StandardOpenOption.APPEND);
     }
 
@@ -68,11 +68,11 @@ public class Log {
         Files.write(Paths.get(this.path), String.format("Erreur saisie colonne %s\n", column).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeErrorColumnNbr(int column) throws IOException {
+    void writeErrorColumnNbr(int column) throws IOException {
         Files.write(Paths.get(this.path), String.format("Erreur colonne non valide %d\n", column).getBytes(),StandardOpenOption.APPEND);
     }
 
-    public void writeErrorColumnFull(int column) throws IOException {
+    void writeErrorColumnFull(int column) throws IOException {
         Files.write(Paths.get(this.path), String.format("Erreur colonne pleine %d\n", column).getBytes(),StandardOpenOption.APPEND);
     }
  }

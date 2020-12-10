@@ -1,9 +1,10 @@
+package game_components;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 import game_components.graphic_display.GraphicDisplay;
 import game_components.players.*;
-import game_components.*;
 import game_components.rule_set.*;
 
 class Game {
