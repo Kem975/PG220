@@ -1,22 +1,20 @@
 package game_components.graphic_display.states;
 
-import game_components.Grid;
+import game_components.Game;
 import game_components.GridTailleException;
-import game_components.Player;
 import game_components.graphic_display.MouseHandler;
 
 import java.awt.*;
 
 public class WinState extends GameState {
 
-    private int winner;
-    private static int blockSize = 50;
+    private final int winner;
     private boolean end = false;
 
-    public WinState(GameStateManager gsm, Grid grid, Player[] players,int nbRound,int winner){
-        super(gsm,grid,players,nbRound);
+    public WinState(GameStateManager gsm,int nbRound,int winner){
+        super(gsm,nbRound);
         this.winner = winner;
-        if(players[winner].getWin() == nbRound){
+        if(gsm.players[winner].getWin() == nbRound){
             end = true;
         }
     }
@@ -31,9 +29,8 @@ public class WinState extends GameState {
                 gsm.pop(0);
                 return;
             }
-            gsm.players = players;
             try {
-                gsm.grid = new Grid(grid.getLength(), grid.getWidth());
+                gsm.grid = Game.gridInit(gsm.grid.getLength(), gsm.grid.getWidth());
             } catch (GridTailleException e) {
                 e.printStackTrace();
             }
@@ -42,19 +39,19 @@ public class WinState extends GameState {
     }
 
     public void render(Graphics2D graphics){
-        assert grid != null;
+        assert gsm.grid != null;
 
         if(winner<0){
             graphics.setColor(Color.black);
             graphics.drawString("Tie !",100,100);
         }
-        else if(players[winner].getWin() < nbRound) {
+        else if(gsm.players[winner].getWin() < nbRound) {
             graphics.setColor(Color.black);
-            graphics.drawString("Player " + winner + " " + players[winner].getName() + " win" + players[winner].getWin() + " out of " + nbRound, 100, 100);
+            graphics.drawString("Player " + winner + " " + gsm.players[winner].getName() + " win" + gsm.players[winner].getWin() + " out of " + nbRound, 100, 100);
         }
-        else if(players[winner].getWin() == nbRound){
+        else if(gsm.players[winner].getWin() == nbRound){
             graphics.setColor(Color.black);
-            graphics.drawString("Player "+players[winner].getName()+" win !",100,100);
+            graphics.drawString("Player "+gsm.players[winner].getName()+" win !",100,100);
         }
     }
 }

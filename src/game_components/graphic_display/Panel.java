@@ -16,7 +16,7 @@ public class Panel extends JPanel implements Runnable{
     private final Grid grid;
     private final Player[] players;
     private final int nbRound;
-    private Rules[] rules;
+    private final Rules[] rules;
 
     private final int blockSize = 50;
 
@@ -132,7 +132,7 @@ public class Panel extends JPanel implements Runnable{
     }
 
     public void draw(){
-        Graphics g = (Graphics) this.getGraphics();
+        Graphics g = this.getGraphics();
         g.drawImage(img, 0, 0, width,height, null);
         g.dispose();
     }

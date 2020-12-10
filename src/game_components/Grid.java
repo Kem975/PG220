@@ -10,7 +10,7 @@ public class Grid {
     private int empty_case;
     private int winc;
 
-    public Grid(int length, int width) throws GridTailleException {
+    Grid(int length, int width) throws GridTailleException {
         if (length >= 4 && length % 2 == 0 && width >= 7) {
             this.length = length;
             this.width = width;
@@ -33,7 +33,7 @@ public class Grid {
         return false;
     }
 
-    public int turn(int column, char pion, Log log) throws IOException {
+    int turn(int column, char pion, Log log) throws IOException {
         if (column >= 0 && column < this.width) {
             for (int i = this.length - 1; i >= 0; i--) {
                 if (this.grid[i][column] == '.') {
@@ -43,14 +43,13 @@ public class Grid {
                 }
             }
             log.writeErrorColumnFull(column);
-        }
-        else{
+        } else {
             log.writeErrorColumnNbr(column);
         }
         return -1;
     }
 
-    public int turnNoLog(int column, char pion){
+    public int turnNoLog(int column, char pion) {
         if (column >= 0 && column < this.width) {
             for (int i = this.length - 1; i >= 0; i--) {
                 if (this.grid[i][column] == '.') {
@@ -63,7 +62,7 @@ public class Grid {
         return -1;
     }
 
-    public void draw() {
+    void draw() {
         for (int i = 0; i < this.width; i++) {
             System.out.print(i + 1);
             System.out.print(" ");
@@ -82,14 +81,10 @@ public class Grid {
         return length;
     }
 
-
     public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
 
     public char[][] getGrid() {
         return grid;

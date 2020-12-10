@@ -7,25 +7,40 @@ import game_components.rule_set.Rules;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameStateManager {
 
-    private ArrayList<GameState> states;
+    private final ArrayList<GameState> states;
     public static final int PLAY = 0;
     public static final int WIN = 1;
     public Grid grid;
     public Player[] players;
-    private int nbRound;
+    private final int nbRound;
     private int winner;
-    private Rules[] rules;
+    Rules[] rules;
+    Color[] color_paws;
 
     public GameStateManager(Grid grid, Player[] players,int nbRound,Rules[] rules){
-        states = new ArrayList<GameState>();
+        states = new ArrayList<>();
         this.winner = -1;
+        this.grid = grid;
         this.rules = rules;
         this.nbRound = nbRound;
         this.players = players;
-        states.add(new PlayState(this, grid,players,nbRound,rules));
+        states.add(new PlayState(this,nbRound));
+        if(players.length > 2){
+            this.color_paws = new Color[players.length];
+            Random rand = new Random();
+            for(int i=0;i<players.length;i++){
+                float r = rand.nextFloat();
+                float g = rand.nextFloat()/2f;
+                float b = rand.nextFloat();
+                System.out.println(r+" "+g+" "+b);
+                color_paws[i] = new Color(r,g,b);
+
+            }
+        }
     }
 
     public void pop(int state){
@@ -38,10 +53,10 @@ public class GameStateManager {
 
     public void add(int state){
         if(state== PLAY){
-            states.add(new PlayState(this, this.grid,players,nbRound,rules));
+            states.add(new PlayState(this ,nbRound));
         }
         if(state == WIN){
-            states.add(new WinState(this,grid,players,nbRound,winner));
+            states.add(new WinState(this,nbRound,winner));
         }
     }
 
@@ -51,20 +66,20 @@ public class GameStateManager {
     }
 
     public void update(){
-        for(int i=0;i<states.size();i++){
-            states.get(i).update();
+        for (GameState state : states) {
+            state.update();
         }
     }
 
     public void input(MouseHandler mouse){
-        for(int i=0;i<states.size();i++){
-            states.get(i).input(mouse);
+        for (GameState state : states) {
+            state.input(mouse);
         }
     }
 
     public void render(Graphics2D graphics){
-        for(int i=0;i<states.size();i++){
-            states.get(i).render(graphics);
+        for (GameState state : states) {
+            state.render(graphics);
         }
     }
 }
