@@ -1,7 +1,5 @@
 package game_components.graphic_display.states;
 
-import game_components.Grid;
-import game_components.Player;
 import game_components.graphic_display.MouseHandler;
 
 import java.awt.Graphics2D;
