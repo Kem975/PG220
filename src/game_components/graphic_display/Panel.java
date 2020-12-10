@@ -8,6 +8,7 @@ import game_components.Player;
 import game_components.graphic_display.states.GameStateManager;
 import game_components.rule_set.Rules;
 
+@SuppressWarnings("serial")
 public class Panel extends JPanel implements Runnable{
 
     private final int width;

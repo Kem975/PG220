@@ -8,7 +8,8 @@ import game_components.players.*;
 import game_components.rule_set.*;
 
 public class Game {
-    public static void main(String[] args) throws GridTailleException, IOException {
+
+    private Game() throws GridTailleException, IOException {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
         Rules[] rules = newRules(in);
@@ -42,7 +43,11 @@ public class Game {
         freeAll(nbr, players);
     }
 
-    private static void consoleDisplay(Grid grid,Player[] players,int nbRound,Log log,Rules[] rules)
+    public static void main(String[] args) throws GridTailleException, IOException {
+        new Game();
+    }
+
+    private void consoleDisplay(Grid grid,Player[] players,int nbRound,Log log,Rules[] rules)
             throws GridTailleException, IOException {
         boolean isWin = false;
         boolean tie = false;
@@ -91,7 +96,7 @@ public class Game {
             System.out.println("Good job " + players[i].getName() + " with pawn " + players[i].getPawn());
     }
 
-    private static void freeAll(int nbr, Player players[]) {
+    private void freeAll(int nbr, Player players[]) {
         for (int p = 0; p < nbr; p++) {
             if (players[p].getType() == 0) {
                 Human human = (Human) players[p];
@@ -100,7 +105,7 @@ public class Game {
         }
     }
 
-    private static boolean checkWin(Player players[], int nbRound) {
+    private boolean checkWin(Player players[], int nbRound) {
         for (int i = 0; i < players.length; i++) {
             if (players[i].getWin() == nbRound)
                 return true;
@@ -108,7 +113,7 @@ public class Game {
         return false;
     }
 
-    private static Player[] makePlayers(int nbr, Scanner in, Log log) throws IOException {
+    private Player[] makePlayers(int nbr, Scanner in, Log log) throws IOException {
         Player players[] = new Player[nbr];
         System.out
                 .println("Choose the Player type :\n- human <name>\n- ia <name>\n- ia:random <name>\n- ia:high <name>");
@@ -123,7 +128,7 @@ public class Game {
         return players;
     }
 
-    private static Player newPlayer(String line, Scanner in, int i, Log log) {
+    private Player newPlayer(String line, Scanner in, int i, Log log) {
         char pawn;
         switch (i) {
             case 0:
@@ -170,7 +175,7 @@ public class Game {
         }
     }
 
-    private static Rules[] newRules(Scanner in) {
+    private Rules[] newRules(Scanner in) {
         int winc;
         String type;
 
@@ -220,7 +225,7 @@ public class Game {
         
     }
 
-    private static Grid newGrid(Scanner in) throws GridTailleException {
+    private Grid newGrid(Scanner in) throws GridTailleException {
         System.out.println("\n\n[WELCOME TO THE BEST CONNECT FOUR]\n\n");
 
         int width = checkInputInt(in, "Width of the grid:", "Must be a number greater than 7.", 7);
@@ -242,7 +247,7 @@ public class Game {
         return gridInit(length, width);
     }
 
-    private static boolean sameName(Player players[], int idx) {
+    private boolean sameName(Player players[], int idx) {
         Player player_to_add = players[idx];
         for (int i = 0; i < idx; i++) {
             Player player = players[i];
@@ -252,7 +257,7 @@ public class Game {
         return true;
     }
 
-    private static int checkInputInt(Scanner in, String str1, String str2, int gt) {
+    private int checkInputInt(Scanner in, String str1, String str2, int gt) {
         int number;
         while (true) {
             System.out.println(str1);

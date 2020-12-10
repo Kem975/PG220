@@ -5,6 +5,8 @@ import game_components.Grid;
 import game_components.Player;
 import game_components.rule_set.Rules;
 
+
+@SuppressWarnings("serial")
 public class Window extends JFrame{
 
     public Window(Grid grid, Player[] players,int nbRound,Rules[] rules){
