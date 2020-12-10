@@ -1,7 +1,6 @@
 package game_components.graphic_display.states;
 
 import game_components.Game;
-import game_components.Grid;
 import game_components.GridTailleException;
 import game_components.graphic_display.MouseHandler;
 
@@ -31,7 +30,7 @@ public class WinState extends GameState {
                 return;
             }
             try {
-                gsm.grid = Game.gridInit(gsm.grid.getLength(), gsm.grid.getWidth()));
+                gsm.grid = Game.gridInit(gsm.grid.getLength(), gsm.grid.getWidth());
             } catch (GridTailleException e) {
                 e.printStackTrace();
             }
