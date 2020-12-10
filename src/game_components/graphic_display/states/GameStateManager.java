@@ -30,6 +30,7 @@ public class GameStateManager {
         this.players = players;
         states.add(new PlayState(this,nbRound));
         if(players.length > 2){
+            this.color_paws = new Color[players.length];
             Random rand = new Random();
             float r = 0;
             float g = 0;

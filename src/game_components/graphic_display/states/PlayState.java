@@ -49,9 +49,8 @@ public class PlayState extends GameState {
         if(mouse.isClicked()){
             int i = mouse.getX()/blockSize;
             this.lastY=gsm.grid.turnNoLog(i,gsm.players[this.turn].getPawn());
-            if(lastY!=1){
+            if(lastY!=-1){
                 this.lastCol = i;
-                gsm.grid = gsm.grid;
                 for (int k = 0; k < gsm.rules.length; k++) {
                     if (gsm.rules[k].IsWin(this.lastY,this.lastCol,gsm.players[turn].getPawn(),gsm.grid)){
                         super.gsm.setWinner(turn);
@@ -88,13 +87,13 @@ public class PlayState extends GameState {
             }
         }
         else{
-            for (int i = 0; i < gsm.grid.getWidth(); i++) {
+            for(int i = 0; i < gsm.grid.getWidth(); i++) {
                 for (int j = 0; j < gsm.grid.getLength(); j++) {
                     if (gsm.grid.getGrid()[j][i] == '.') {
                         graphics.setColor(Color.white);
                     }
                     else{
-                        for(int player=0;player>gsm.players.length;player++){
+                        for(int player=0;player<gsm.players.length;player++){
                             if(gsm.grid.getGrid()[j][i] == gsm.players[player].getPawn()){
                                 graphics.setColor(gsm.color_paws[player]);
                             }
