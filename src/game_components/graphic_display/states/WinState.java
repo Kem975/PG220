@@ -11,10 +11,14 @@ public class WinState extends GameState {
 
     private int winner;
     private static int blockSize = 50;
+    private boolean end = false;
 
     public WinState(GameStateManager gsm, Grid grid, Player[] players,int nbRound,int winner){
         super(gsm,grid,players,nbRound);
         this.winner = winner;
+        if(players[winner].getWin() == nbRound){
+            end = true;
+        }
     }
 
     public void update(){
@@ -23,6 +27,10 @@ public class WinState extends GameState {
 
     public void input(MouseHandler mouse){
         if(mouse.isClicked()){
+            if(end){
+                gsm.pop(0);
+                return;
+            }
             gsm.players = players;
             try {
                 gsm.grid = new Grid(grid.getLength(), grid.getWidth());
