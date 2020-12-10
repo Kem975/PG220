@@ -36,9 +36,9 @@ public class GameStateManager {
             float g = 0;
             float b = 0;
             for(int i=0;i<players.length;i++){
-                r = rand.nextFloat()/2f;
+                r = rand.nextFloat();
                 g = rand.nextFloat()/2f;
-                b = rand.nextFloat()/2f;
+                b = rand.nextFloat();
                 System.out.println(r+" "+g+" "+b);
                 color_paws[i] = new Color(r,g,b);
 
