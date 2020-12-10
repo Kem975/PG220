@@ -10,7 +10,7 @@ public class Grid {
     private int empty_case;
     private int winc;
 
-    public Grid(int length, int width) throws GridTailleException {
+    Grid(int length, int width) throws GridTailleException {
         if (length >= 4 && length % 2 == 0 && width >= 7) {
             this.length = length;
             this.width = width;

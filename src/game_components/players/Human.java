@@ -33,7 +33,6 @@ public class Human extends Player {
                     e.printStackTrace();
                 }
             }
-            System.out.println("Here");
         }
 
         if(colonne>0 && colonne<=grille.getWidth()){
