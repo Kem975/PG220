@@ -9,14 +9,10 @@ import java.awt.Graphics2D;
 public abstract class GameState {
 
     protected final GameStateManager gsm;
-    protected final Grid grid;
-    protected final Player[] players;
     protected  final int nbRound;
 
-    public GameState(GameStateManager gsm, Grid grid, Player[] players,int nbRound){
+    public GameState(GameStateManager gsm,int nbRound){
         this.gsm = gsm;
-        this.grid = grid;
-        this.players = players;
         this.nbRound = nbRound;
     }
 

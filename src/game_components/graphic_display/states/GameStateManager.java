@@ -7,25 +7,42 @@ import game_components.rule_set.Rules;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameStateManager {
 
-    private ArrayList<GameState> states;
+    private final ArrayList<GameState> states;
     public static final int PLAY = 0;
     public static final int WIN = 1;
     public Grid grid;
     public Player[] players;
-    private int nbRound;
+    private final int nbRound;
     private int winner;
-    private Rules[] rules;
+    Rules[] rules;
+    Color[] color_paws;
 
     public GameStateManager(Grid grid, Player[] players,int nbRound,Rules[] rules){
         states = new ArrayList<GameState>();
         this.winner = -1;
+        this.grid = grid;
         this.rules = rules;
         this.nbRound = nbRound;
         this.players = players;
-        states.add(new PlayState(this, grid,players,nbRound,rules));
+        states.add(new PlayState(this,nbRound));
+        if(players.length > 2){
+            Random rand = new Random();
+            float r = 0;
+            float g = 0;
+            float b = 0;
+            for(int i=0;i<players.length;i++){
+                r = rand.nextFloat()/2f;
+                g = rand.nextFloat()/2f;
+                b = rand.nextFloat()/2f;
+                System.out.println(r+" "+g+" "+b);
+                color_paws[i] = new Color(r,g,b);
+
+            }
+        }
     }
 
     public void pop(int state){
@@ -38,10 +55,10 @@ public class GameStateManager {
 
     public void add(int state){
         if(state== PLAY){
-            states.add(new PlayState(this, this.grid,players,nbRound,rules));
+            states.add(new PlayState(this ,nbRound));
         }
         if(state == WIN){
-            states.add(new WinState(this,grid,players,nbRound,winner));
+            states.add(new WinState(this,nbRound,winner));
         }
     }
 
