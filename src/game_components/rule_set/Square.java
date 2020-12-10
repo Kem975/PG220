@@ -1,6 +1,6 @@
 package game_components.rule_set;
 
-import game_components.rule_set.Rules;
+
 import game_components.Grid;
 
 

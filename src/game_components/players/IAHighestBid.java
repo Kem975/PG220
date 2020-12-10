@@ -7,9 +7,7 @@ public class IAHighestBid extends Player{
     
     
     public IAHighestBid(String name,char pawn){
-        super(name);
-        this.pawn = pawn;
-        this.type = 1;
+        super(name,pawn,1);
     }
 
     public int nextMove(Grid grid) {

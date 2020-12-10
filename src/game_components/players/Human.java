@@ -8,13 +8,11 @@ import game_components.Log;
 
 public class Human extends Player {
 
-    protected Log log;
-    protected Scanner sc;
+    Log log;
+    Scanner sc;
 
     public Human(String name, char pawn, Log log) {
-        super(name);
-        this.pawn = pawn;
-        this.type = 0;
+        super(name,pawn,0);
         this.log = log;
         this.sc = new Scanner(System.in,"UTF-8");
 
