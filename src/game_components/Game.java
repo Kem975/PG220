@@ -27,7 +27,9 @@ public class Game {
             log.writePlayer(i, players[i].getType(), players[i].getName());
         }
         System.out.println("Do you want to use the graphic display ? Y/N");
-        String[] graphic = in.nextLine().split("\n");
+        String tmp = in.nextLine();
+        isSortir(tmp);
+        String[] graphic = tmp.split("\n");
         if (graphic[0].equals("Y") | graphic[0].equals("y")) {
             graphic_display = true;
         }
@@ -144,6 +146,7 @@ public class Game {
         while (true) {
             System.out.println(line);
             String player = in.nextLine();
+            isSortir(player);
             String mot[] = player.split(" ");
             if (mot.length < 2) {
                 try {
@@ -185,6 +188,7 @@ public class Game {
             System.out.println("    - Square");
             System.out.println("    - Both");
             type = in.nextLine();
+            isSortir(type);
             if (type.equals("Square")) {
                 Rules[] rule_set = new Rules[1];
                 rule_set[0] = new Square();
@@ -192,7 +196,9 @@ public class Game {
             } else if (type.equals("Basic")) {
                 System.out.println("Number of pawns to win:");
                 try {
-                    winc = Integer.parseInt(in.nextLine());
+                    String tmp = in.nextLine();
+                    isSortir(tmp);
+                    winc = Integer.parseInt(tmp);
                     if (winc >= 3) {
                         Rules[] rule_set = new Rules[1];
                         rule_set[0] = new Basic(winc);
@@ -205,7 +211,9 @@ public class Game {
             } else if (type.equals("Both")) {
                 System.out.println("Number of pawns to win:");
                 try {
-                    winc = Integer.parseInt(in.nextLine());
+                    String tmp =in.nextLine();
+                    isSortir(tmp);
+                    winc = Integer.parseInt(tmp);
                     if (winc >= 3) {
                         Rules[] rule_set = new Rules[2];
                         rule_set[0] = new Square();
@@ -234,7 +242,9 @@ public class Game {
         while (true) {
             System.out.println("Length of the grid:");
             try {
-                length = Integer.parseInt(in.nextLine());
+                String tmp = in.nextLine();
+                isSortir(tmp);
+                length = Integer.parseInt(tmp);
                 if (length >= 4 && length % 2 == 0)
                     break;
                 else
@@ -262,7 +272,9 @@ public class Game {
         while (true) {
             System.out.println(str1);
             try {
-                number = Integer.parseInt(in.nextLine());
+                String tmp = in.nextLine();
+                isSortir(tmp);
+                number = Integer.parseInt(tmp);
                 if (number >= gt)
                     break;
                 else
@@ -272,5 +284,11 @@ public class Game {
             }
         }
         return number;
+    }
+
+    public static void isSortir(String input) {
+        if (input.equals("sortir")) {
+            System.exit(0);
+        }
     }
 }

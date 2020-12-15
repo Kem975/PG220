@@ -5,6 +5,7 @@ import java.util.Scanner;
 import game_components.Player;
 import game_components.Grid;
 import game_components.Log;
+import game_components.Game;
 
 public class Human extends Player {
 
@@ -22,6 +23,7 @@ public class Human extends Player {
         int colonne;
         while (true) {
             String line = this.sc.nextLine();
+            Game.isSortir(line);
             try {
                 colonne = Integer.parseInt(line);
                 break;
