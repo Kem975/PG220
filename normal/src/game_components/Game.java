@@ -12,10 +12,9 @@ public class Game {
         Scanner in = new Scanner(System.in);
         Grid grid = newGrid(in);
         Rules[] rules = newRules(in);
-        boolean graphic_display = false;
-        int nbRound = checkInputInt(in, "Number of round won to win the game ?", "Must be a positive number.", 0);
+        int nbRound = 4;
 
-        int nbr = checkInputInt(in, "Number of player ?", "Must be a number greater than 2", 2);
+        int nbr = 2;
 
         Log log = new Log();
         log.reset();
@@ -25,8 +24,7 @@ public class Game {
         for (int i = 0; i < nbr; i++) {
             log.writePlayer(i, players[i].getType(), players[i].getName());
         }
-        consoleDisplay(grid,players,nbRound,log,rules);
-
+        consoleDisplay(grid, players, nbRound, log, rules);
 
         in.close();
         freeAll(nbr, players);
@@ -36,7 +34,7 @@ public class Game {
         new Game();
     }
 
-    private void consoleDisplay(Grid grid,Player[] players,int nbRound,Log log,Rules[] rules)
+    private void consoleDisplay(Grid grid, Player[] players, int nbRound, Log log, Rules[] rules)
             throws GridTailleException, IOException {
         boolean isWin = false;
         boolean tie = false;
@@ -104,10 +102,8 @@ public class Game {
 
     private Player[] makePlayers(int nbr, Scanner in, Log log) throws IOException {
         Player players[] = new Player[nbr];
-        System.out
-                .println("Choose the Player type :\n- human <name>\n- ia <name>\n- ia:random <name>\n- ia:high <name>");
         for (int i = 0; i < nbr; i++) {
-            players[i] = newPlayer("Player " + (i + 1) + " ?", in, i, log);
+            players[i] = newPlayer("Joueur " + (i + 1) + "?", in, i, log);
             while (!sameName(players, i)) {
                 System.out.println("This name is already taken");
                 players[i] = newPlayer("Player " + (i + 1) + " ?", in, i, log);
@@ -166,82 +162,18 @@ public class Game {
     }
 
     private Rules[] newRules(Scanner in) {
-        int winc;
-        String type;
-
-        while (true) {
-            System.out.println("Select a rule type :");
-            System.out.println("    - Basic");
-            System.out.println("    - Square");
-            System.out.println("    - Both");
-            type = in.nextLine();
-            isSortir(type);
-            if (type.equals("Square")) {
-                Rules[] rule_set = new Rules[1];
-                rule_set[0] = new Square();
-                return rule_set;
-            } else if (type.equals("Basic")) {
-                System.out.println("Number of pawns to win:");
-                try {
-                    String tmp = in.nextLine();
-                    isSortir(tmp);
-                    winc = Integer.parseInt(tmp);
-                    if (winc >= 3) {
-                        Rules[] rule_set = new Rules[1];
-                        rule_set[0] = new Basic(winc);
-                        return rule_set;
-                    } else
-                        System.out.println("Must be a number greater than 3");
-                } catch (NumberFormatException ex) {
-                    System.out.println("Must be a number greater than 3");
-                }
-            } else if (type.equals("Both")) {
-                System.out.println("Number of pawns to win:");
-                try {
-                    String tmp =in.nextLine();
-                    isSortir(tmp);
-                    winc = Integer.parseInt(tmp);
-                    if (winc >= 3) {
-                        Rules[] rule_set = new Rules[2];
-                        rule_set[0] = new Square();
-                        rule_set[1] = new Basic(winc);
-                        return rule_set;
-                    } else
-                        System.out.println("Must be a number greater than 3");
-                } catch (NumberFormatException ex) {
-                    System.out.println("Must be a number greater than 3");
-                }
-            }
-        }
+        Rules[] rule_set = new Rules[1];
+        rule_set[0] = new Basic(4);
+        return rule_set;
     }
 
     public static Grid gridInit(int l, int w) throws GridTailleException {
-        return new Grid(l,w);
+        return new Grid(l, w);
 
     }
 
     private Grid newGrid(Scanner in) throws GridTailleException {
-        System.out.println("\n\n[WELCOME TO THE BEST CONNECT FOUR]\n\n");
-
-        int width = checkInputInt(in, "Width of the grid:", "Must be a number greater than 7.", 7);
-        int length;
-
-        while (true) {
-            System.out.println("Length of the grid:");
-            try {
-                String tmp = in.nextLine();
-                isSortir(tmp);
-                length = Integer.parseInt(tmp);
-                if (length >= 4 && length % 2 == 0)
-                    break;
-                else
-                    System.out.println("Must be a number greater than 4 and even.");
-            } catch (NumberFormatException ex) {
-                System.out.println("Must be a number greater than 4 and even.");
-            }
-        }
-
-        return gridInit(length, width);
+        return gridInit(6, 7);
     }
 
     private boolean sameName(Player players[], int idx) {
