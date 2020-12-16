@@ -142,7 +142,7 @@ public class Game {
                 System.out.println("Or: ia Bob");
                 continue;
             }
-            if (mot[0].equals("human")) {
+            if (mot[0].equals("humain")) {
                 return new Human(mot[1], pawn, log);
             } else if (mot[0].equals("ia")) {
                 return new IARandom(mot[1], pawn);
