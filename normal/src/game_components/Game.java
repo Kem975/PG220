@@ -3,7 +3,6 @@ package game_components;
 import java.io.IOException;
 import java.util.Scanner;
 
-import game_components.graphic_display.GraphicDisplay;
 import game_components.players.*;
 import game_components.rule_set.*;
 
@@ -27,7 +26,7 @@ public class Game {
             log.writePlayer(i, players[i].getType(), players[i].getName());
         }
         consoleDisplay(grid,players,nbRound,log,rules);
-        
+
 
         in.close();
         freeAll(nbr, players);
