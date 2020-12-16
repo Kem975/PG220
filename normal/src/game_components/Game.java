@@ -26,20 +26,8 @@ public class Game {
         for (int i = 0; i < nbr; i++) {
             log.writePlayer(i, players[i].getType(), players[i].getName());
         }
-        System.out.println("Do you want to use the graphic display ? Y/N");
-        String tmp = in.nextLine();
-        isSortir(tmp);
-        String[] graphic = tmp.split("\n");
-        if (graphic[0].equals("Y") | graphic[0].equals("y")) {
-            graphic_display = true;
-        }
-
-
-        if (graphic_display) {
-            new GraphicDisplay(grid, players, nbRound, rules);
-        } else {
-            consoleDisplay(grid,players,nbRound,log,rules);
-        }
+        consoleDisplay(grid,players,nbRound,log,rules);
+        
 
         in.close();
         freeAll(nbr, players);
@@ -230,7 +218,7 @@ public class Game {
 
     public static Grid gridInit(int l, int w) throws GridTailleException {
         return new Grid(l,w);
-        
+
     }
 
     private Grid newGrid(Scanner in) throws GridTailleException {
